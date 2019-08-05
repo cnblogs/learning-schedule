@@ -1,0 +1,86 @@
+version: '3.4'
+services:
+  api:
+    image: registry-vpc.cn-hangzhou.aliyuncs.com/cnblogs/${APP_NAME}-api:${IMAGE_VERSION}
+    deploy:
+      replicas: ${REPLICAS}
+      resources:
+        limits:
+          cpus: "1.5"
+          memory: 1G
+        reservations:
+          memory: 100M
+      update_config:
+        order: start-first
+      placement:
+        constraints: [node.role == worker]
+    working_dir: /app
+    environment: 
+      - TZ=Asia/Shanghai
+    volumes:
+      - /${NAS}/appsettings/${APP_NAME}/api:/appsettings
+      - /${NAS}/logs/${APP_NAME}/api:/app/logs
+      - /${NAS}/docker-config:/docker-config
+    command: bash -c 'cat /docker-config/cnblogs-hosts >> /etc/hosts && cp /appsettings/appsettings.Production.json . && sh run.sh'
+    networks:
+      private:
+   
+  spa:
+    image: registry-vpc.cn-hangzhou.aliyuncs.com/cnblogs/${APP_NAME}-spa:${IMAGE_VERSION}
+    deploy:
+      replicas: ${REPLICAS}
+      resources:
+        limits:
+          cpus: "1.5"
+          memory: 1G
+        reservations:
+          memory: 100M
+      update_config:
+        order: start-first
+      placement:
+        constraints: [node.role == worker]
+    working_dir: /app
+    environment: 
+      - TZ=Asia/Shanghai
+    volumes:
+      - /${NAS}/docker-config:/docker-config
+      - /${NAS}/logs/${APP_NAME}/spa:/app/logs
+    depends_on:
+      - api
+    command: bash -c 'cat /docker-config/cnblogs-hosts >> /etc/hosts && sh run.sh'
+    networks:
+      private:
+
+  web:
+    image: registry-vpc.cn-hangzhou.aliyuncs.com/cnblogs/${APP_NAME}-web:${IMAGE_VERSION}
+    deploy:
+      replicas: ${REPLICAS}
+      resources:
+        limits:
+          cpus: "1.5"
+          memory: 1G
+        reservations:
+          memory: 100M
+      update_config:
+        order: start-first
+      placement:
+        constraints: [node.role == worker]
+    working_dir: /app
+    environment: 
+      - TZ=Asia/Shanghai
+    depends_on:
+      - api
+      - spa
+    volumes:
+      - /${NAS}/logs/${APP_NAME}/web:/app/logs
+      - /${NAS}/docker-config:/docker-config
+    command: bash -c 'cat /docker-config/cnblogs-hosts >> /etc/hosts && sh run.sh'
+    networks:
+      public:
+      private:
+
+networks:
+  public:
+    external: true
+  private:
+    external: true

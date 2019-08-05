@@ -1,0 +1,43 @@
+<div class="card">
+  <div class="h-100 d-flex flex-column flex-grow-1">
+    <div *appBoard="schedule.id" class="light-row d-flex justify-content-between position-relative bb">
+
+      <app-pan-menu (edit)="modalSvc.open(schedule.id)" (delete)="delSchedule(schedule.id);panSvc.closeMenu(ele)"
+                    (checked)="onClick();panSvc.closeMenu(ele)" [completed]="completed">
+      </app-pan-menu>
+
+      <div #ele class="d-flex light-prefix flex-grow-1 pan-container py-2" (panstart)="panSvc.panstart(ele,$event)"
+           (panmove)="panMove($event,ele)" (panend)="panEnd(ele)">
+        <div class="d-flex flex-column justify-content-center mr-2">
+          <input type="checkbox" class="circle-check" (click)="onClick($event)" [checked]="schedule.dateEnd"
+                 [disabled]="!(isScheduleOwner() | async)">
+        </div>
+        <b>{{schedule.title}}</b>
+      </div>
+
+      <div class="light-ellipses d-flex py-2" *ngIf="isScheduleOwner() | async">
+        <img src="/assets/edit.svg" class="point ml-2" [modalOpen]="schedule.id" tooltip="编辑学习目标" placement="bottom"
+             display-mobile=false>
+        <button class="oi oi-x gray-999-i point mx-2 oi-rel" (click)="delSchedule(schedule.id)" tooltip="删除学习目标"
+                placement="bottom" display-mobile=false></button>
+      </div>
+    </div>
+
+    <div *appModal="schedule.id" class="bb">
+      <app-schedule-header-editor [schedule]="schedule" [completed]="completed" (cancel)="modalSvc.close(schedule.id)"
+                                  (update)="updateSchedule($event)"></app-schedule-header-editor>
+    </div>
+
+    <div class="flex-grow-1 d-flex flex-column">
+      <app-schedule-items [scheduleId]="schedule.id" [source]="schedule.items" class="d-flex flex-column flex-grow-1"
+                          [completed]="completed" [owner]="isScheduleOwner() | async" (pageChanged)="scrollCenter()">
+      </app-schedule-items>
+    </div>
+  </div>
+
+  <div class="abs-right-top point" (click)="togglePrivate(schedule)" *ngIf="isScheduleOwner() | async">
+    <img *ngIf="schedule.isPrivate" src="/assets/private.svg" tooltip="仅自己可见" placement="bottom" display-mobile=false>
+    <span *ngIf="!schedule.isPrivate" class="oi oi-eye primary-green" tooltip="公开" placement="bottom"
+          display-mobile=false></span>
+  </div>
+</div>

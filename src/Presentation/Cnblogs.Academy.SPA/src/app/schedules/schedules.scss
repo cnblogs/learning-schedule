@@ -1,0 +1,21 @@
+.gray-icon {
+  filter: grayscale(100%);
+}
+
+.icon {
+  position: relative;
+  top: -1px;
+}
+
+.small-icon {
+  @extend .icon;
+  width: 1rem;
+}
+
+.no-outline {
+  outline: 0;
+}
+
+.v-hidden {
+  visibility: hidden;
+}

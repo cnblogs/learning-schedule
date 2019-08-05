@@ -1,0 +1,38 @@
+<div class="position-relative flex-grow-1">
+  <div class="flex-grow-1 margin-1 position-relative h-100" [class.forbidden]="completed">
+    <div class="sleeve left" *ngIf="hasPrev" (click)="prev()"></div>
+
+    <div class="waistcoat">
+
+      <ul class="mb-0" [@listAnimation]="source.length">
+        <li *ngFor="let item of items" class="items">
+          <div class="d-flex">
+            <div class="flex-grow-1 bb">
+              <app-schedule-item-title [scheduleId]="scheduleId" [item]="item" (delete)="delItem($event)"
+                                       [disabled]="!owner">
+              </app-schedule-item-title>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <div class="ml-3" *ngIf="!hasNext && !completed && owner">
+        <div *appBoard="scheduleId" [modalOpen]="scheduleId" class="point py-2 bb grayless">
+          <img src="/assets/addition.svg" class="gray-icon mr-2 icon pl-sm-2">
+          <span>添加学习任务</span>
+        </div>
+        <div *appModal="scheduleId" class="bb pr-sm-2">
+          <app-schedule-item-editor [scheduleId]="scheduleId" (cancel)="modalSvc.close(scheduleId)"
+                                    (insert)="addItem($event);modalSvc.close(scheduleId)"></app-schedule-item-editor>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="sleeve right" *ngIf="hasNext" (click)="next()"></div>
+
+    <div class="paging" *ngIf="totalPage > 1" (swipeleft)="next()" (swiperight)="prev()">
+      <span *ngFor="let i of pageArray" [class.active]="i == pageIndex" (click)="goToPage(i)"></span>
+    </div>
+  </div>
+</div>

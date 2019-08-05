@@ -1,0 +1,34 @@
+.indicator {
+  display: none;
+}
+@media (pointer: coarse) {
+  .indicator {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    /* justify-content: flex-end; */
+    align-items: center;
+  }
+
+  .indicator span {
+    color: #FFF;
+    margin: 0 1rem;
+  }
+}
+
+.bg-yellow {
+  background-color: #fdcf3c !important;
+}
+
+.bg-red {
+  background-color: #fc3e40 !important;
+}
+
+.bg-green {
+  background-color: #cccccc;
+}
+
+.bg-green.checked {
+  background-color: #9ECA9F;
+}

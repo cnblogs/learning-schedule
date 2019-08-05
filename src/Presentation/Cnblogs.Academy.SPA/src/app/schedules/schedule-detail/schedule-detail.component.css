@@ -1,0 +1,15 @@
+.portrait {
+  border-radius: 100%;
+}
+
+.bb-1 {
+  border-bottom: 1px solid #f5f0f0;
+}
+
+.mw-8 {
+  min-width: 10rem;
+}
+
+.mw {
+  min-width: 7rem;
+}

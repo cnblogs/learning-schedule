@@ -1,0 +1,33 @@
+<div>
+  <ul class="list-group">
+    <ng-container *ngIf="references">
+      <li *ngFor="let ref of references" class="list-group-item radius-0 mb-2 d-flex">
+        <div *appBoard="ref.id" class="">
+          <small (click)="open(ref.id)">{{subHost(ref.url)}}</small>
+          <a [href]="ref.url" target="_blank" class="ml-2"><small class="oi oi-external-link gray-999-i"></small></a>
+        </div>
+        <div *appModal="ref.id" class="flex-grow-1">
+          <app-schedule-item-reference-editor [itemId]="itemId" [reference]="ref"
+                                              (referenceUpdated)="update($event,ref);modalSvc.close(ref.id)"
+                                              (closed)="modalSvc.close(ref.id)">
+          </app-schedule-item-reference-editor>
+        </div>
+        <div class="ml-auto v-hidden" *ngIf="itemOwner">
+          <span class="oi oi-x gray-999-i point mx-2" (click)="delete(ref)"></span>
+        </div>
+      </li>
+      <li class="list-group-item radius-0" *ngIf="itemOwner">
+        <div>
+          <div *appBoard="'newref'" [modalOpen]="'newref'">
+            <small>输入链接地址</small>
+          </div>
+          <div *appModal="'newref'">
+            <app-schedule-item-reference-editor [itemId]="itemId" (referenceAdded)="add($event)"
+                                                (closed)="modalSvc.close('newref')">
+            </app-schedule-item-reference-editor>
+          </div>
+        </div>
+      </li>
+    </ng-container>
+  </ul>
+</div>

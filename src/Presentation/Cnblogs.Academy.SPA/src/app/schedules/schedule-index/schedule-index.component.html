@@ -1,0 +1,38 @@
+<div class="gray-666 position-relative">
+  <div *ngIf="!!!list" class="vh-50">
+    <ngx-loading [show]="true"></ngx-loading>
+  </div>
+  <div *ngIf="list">
+    <div *ngIf="list.length < 1" class="my-3">
+      还没有计划
+    </div>
+    <div class="row" *ngIf="(permissionSvc.isOwner | async) && !permissionSvc.inTeach && !completedOnly">
+      <div class="col-md-12" *ngIf="list.length < 1">
+        <div *appBoard="'newone'" class="card">
+          <div class="d-flex justify-content-center">
+            <img src="/assets/addition2.svg" class="align-self-center mt-5 mb-4 point"
+                 (click)="modalSvc.open('newone')">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div *appModal="'newone'" class="card">
+          <div class="bb">
+            <app-schedule-header-editor (cancel)="modalSvc.close('newone')"
+                                        (insert)="addSchedule($event);modalSvc.close('newone')">
+            </app-schedule-header-editor>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div *ngFor="let schedule of list | paginate: config">
+        <app-schedule [schedule]="schedule" (delete)="delSchedule($event)">
+        </app-schedule>
+      </div>
+      <app-paging [config]="config" *ngIf="list.length > 0"></app-paging>
+    </div>
+  </div>
+</div>

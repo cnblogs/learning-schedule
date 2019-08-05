@@ -1,0 +1,41 @@
+<form #headerForm="ngForm" (ngSubmit)="headerForm.form.valid ? save() : null" (keydown.esc)="close()">
+  <div class="row">
+    <div class="col-sm-12 col-md-auto flex-grow-1 row py-1">
+      <div class="d-flex col-md-auto flex-grow-1">
+        <div class="d-flex flex-column mr-2 mt-2">
+          <input type="checkbox" class="circle-check" disabled [checked]="completed">
+        </div>
+        <div class="w-100 d-flex flex-wrap">
+          <input name="title" class="slim gray-666 ph" [(ngModel)]="title" #input="ngModel"
+                 [ngModelOptions]="{updateOn: 'submit'}" required minlength="2" maxlength="200" placeholder="发布学习目标" />
+
+          <div *ngIf="input.invalid && (input.dirty || input.touched)" class="px-0 px-md col-sm-6 col-md-auto d-flex">
+            <small class="text-danger align-self-center">
+              <span *ngIf="input?.errors?.required">不能为空</span>
+              <span *ngIf="input?.errors?.minlength">最少2个字</span>
+              <span *ngIf="input?.errors?.maxlength">最长不能超过200个字</span>
+            </small>
+          </div>
+
+          <div class="font-small d-flex" *ngIf="schedule.id < 1">
+            <label class="align-self-center mb-0">
+              <input type="radio" name="isPrivate" [value]="false" [(ngModel)]="isPrivate" class="radio">
+              <span>公开</span>
+            </label>
+            <label class="ml-2 align-self-center mb-0">
+              <input type="radio" name="isPrivate" [value]="true" [(ngModel)]="isPrivate" class="radio">
+              <span>私有</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-md-auto d-flex justify-content-end">
+      <div class="align-self-center">
+        <button type="submit" class="btn btn-outline-primary no-border btn-sm">发布</button>
+        <button type="reset" (click)="close()" class="btn btn-outline-secondary no-border btn-sm">取消</button>
+      </div>
+    </div>
+  </div>
+</form>

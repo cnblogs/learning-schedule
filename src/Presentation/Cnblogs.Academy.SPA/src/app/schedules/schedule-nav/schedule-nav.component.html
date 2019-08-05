@@ -1,0 +1,12 @@
+<div class="mt-3">
+  <div class="d-flex">
+    <a [routerLink]="['study']" [routerLinkActive]="['active']">{{(permissionSvc.isOwner | async) ? '我' : 'Ta'}}学习的</a>
+    /
+    <a [routerLink]="['teach']" [routerLinkActive]="['active']">{{(permissionSvc.isOwner | async) ? '我' : 'Ta'}}教授的</a>
+  </div>
+
+  <div class="mt-3">
+    <router-outlet></router-outlet>
+  </div>
+
+</div>

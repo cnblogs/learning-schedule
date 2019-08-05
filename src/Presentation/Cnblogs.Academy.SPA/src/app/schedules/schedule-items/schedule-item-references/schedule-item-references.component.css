@@ -1,0 +1,9 @@
+@import "../../schedules.scss";
+
+li:hover .v-hidden {
+  visibility: visible;
+}
+
+.radius-0 {
+  border-radius: 0;
+}

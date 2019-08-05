@@ -1,0 +1,262 @@
+$body-bg:#F5F5F5;
+$input-focus-box-shadow: unset;
+$custom-file-text: (
+  cn: "浏览"
+);
+@import "~bootstrap/scss/bootstrap";
+@import '~ngx-toastr/toastr.css';
+
+/* You can add global styles to this file, and also import other style files */
+body {
+    font-family: 'PingFang SC', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !important;
+    letter-spacing: 1.5px;
+    color: #666666;
+}
+
+a {
+  color: #666666;
+}
+
+a:hover {
+  color: #7ab97c;
+  text-decoration: none;
+}
+
+.gray-333 {
+  color: #333333;
+}
+
+.gray-666 {
+  color: #666666;
+}
+
+.gray-999 {
+  color: #999999;
+}
+
+.gray-999-i {
+  color: #999999 !important;
+}
+
+.full-screen {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.full-screen .content {
+    flex: 1;
+}
+
+.right-middle {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+}
+
+.height-50 {
+    min-height: 50vh;
+    position: relative;
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+.modal {
+    display: unset !important;
+    bottom: unset !important;
+}
+
+footer {
+    border-top: solid 1px #eeeeee;
+    padding: .5rem 0;
+    text-align: center;
+    color: #fff;
+    letter-spacing: 1px;
+    color:  #999999;
+}
+
+footer a {
+  color:  #999999;
+}
+
+.open > .collapse {
+  display: block !important;
+}
+
+.open > .dropdown-menu {
+  display: block !important;
+}
+
+.icon::before {
+  opacity: 0.8;
+  margin-right: .5rem;
+  vertical-align: middle;
+}
+
+.icon-large::before {
+  font-size: x-large;
+  opacity: 0.8;
+}
+
+.point {
+  cursor: pointer;
+}
+
+.cursor-default {
+  cursor: default !important;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.dropdown-menu {
+  min-width: unset;
+}
+
+.dropdown-menu-right {
+  left: unset;
+  right: 0;
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+  background-color: #f5f9f5;
+}
+
+.dropdown-menu-carrot::before {
+  top: -16px;
+  right: 1.5rem;
+  left: auto;
+  border: 8px solid transparent;
+  border-bottom-color: rgba(27,31,35,0.15);
+  position: absolute;
+  display: inline-block;
+  content: "";
+}
+
+.dropdown-menu-carrot::after {
+  top: -14px;
+  right: calc(1.5rem + 1px);
+  left: auto;
+  border: 7px solid transparent;
+  border-bottom-color: #fff;
+  position: absolute;
+  display: inline-block;
+  content: "";
+}
+
+.p-mb-0 p {
+  margin-bottom: 0 !important;
+}
+
+.world-keep * {
+  word-break: break-word;
+}
+
+// ovveride toastr
+.toast-container .toast {
+  box-shadow: 0 0 12px rgba(0,0,0,.1);
+}
+.toast-container .toast:hover {
+  box-shadow: 0 0 12px rgba(0,0,0,.3);
+}
+
+//override sweetalert
+.swal2-confirm,.swal2-help,.swal2-ok {
+  background-color: #7ab97c !important;
+}
+.swal2-danger {
+  background-color: #e64942 !important;
+}
+.swal2-confirm:not([disabled]):hover,.swal2-help:not([disabled]):hover,.swal2-ok:not([disabled]):hover{
+  background-color: #73a775;
+}
+.swal1-danger:not([disabled]):hover {
+  background-color: #df4740;
+}
+.swal1-cancel{
+  color: gray;
+}
+.swal-title {
+  word-break: break-all;
+}
+
+.tooltip {
+  border-radius: 3px !important;
+  background-color: #333333 !important;
+  box-shadow: none !important;
+  color: #eeeeee !important;
+  font-size: 12px !important;
+}
+
+.tooltip-arrow {
+  background-color: #333333 !important;
+}
+
+.circle-check {
+  appearance: none;
+	border: 1px solid #999999;
+	padding: .5rem !important;
+	border-radius: 100%;
+	display: inline-block;
+  position: relative;
+  outline: transparent;
+  cursor: pointer;
+  vertical-align: sub;
+}
+
+.circle-sm-check {
+  @extend .circle-check;
+  padding: 0.45rem !important;
+}
+
+.circle-check:checked {
+  background-color: #9ECA9F;
+  border-color: #9ECA9F;
+}
+
+.circle-check:disabled {
+  cursor: default;
+}
+
+.circle-check:checked::before{
+  content: url(/assets/dui.svg);
+	font-size: 12px;
+	position: absolute;
+	top: 0px;
+  left: 2px;
+  right: 0;
+  line-height: 1rem;
+}
+
+.card {
+  word-break: break-all;
+  background: #FFFFFF;
+  box-shadow: 0 1px 1px 0 #e6e2e280;
+  border-radius: 6px;
+  border: none;
+}
+
+@media (pointer: coarse) {
+  .card {
+    margin: .5rem -1rem;
+    border-left: none;
+    border-right: none;
+  }
+}
+
+// https://stackoverflow.com/a/22925181/4718891
+:invalid {
+  box-shadow: none;
+}
+
+:-moz-submit-invalid {
+  box-shadow: none;
+}
+
+:-moz-ui-invalid {
+  box-shadow:none;
+}

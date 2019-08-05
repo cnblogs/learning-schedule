@@ -1,0 +1,6 @@
+FROM node
+WORKDIR /app
+COPY . .
+# HEALTHCHECK --interval=5s --timeout=20s \
+#   CMD curl -fs -o /dev/null localhost/alive || exit 1
+CMD PORT=80 npm run serve:ssr

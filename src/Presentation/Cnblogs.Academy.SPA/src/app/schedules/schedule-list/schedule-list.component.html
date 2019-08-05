@@ -1,0 +1,17 @@
+<div class="mt-3" *ngIf="groups">
+  <div *ngFor="let group of groups">
+    <time class="gray-666 font-weight-bold">{{group.key() | amDateFormat: "YY年MM月DD日"}}</time>
+    <div class="card my-2 flex-row" *ngFor="let schedule of group.toArray() | paginate: config">
+      <div class="d-flex m-3">
+        <div class="mr-2"><input type="checkbox" class="circle-check cursor-default" [checked]="schedule.dateEnd"
+                 disabled></div>
+        <span class="flex-grow-1"><a [routerLink]="['/schedules/u',schedule.user.alias,schedule.id]"
+             class="">{{schedule.title}}</a></span>
+      </div>
+      <div class="abs-rc align-self-center ml-auto mr-3 ng-star-inserted" *ngIf="schedule.isPrivate">
+        <img src="/assets/private.svg">
+      </div>
+    </div>
+  </div>
+  <app-paging [config]="config" (change)="pageChanged.emit($event)" *ngIf="schedules.length > 0"></app-paging>
+</div>

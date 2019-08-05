@@ -1,0 +1,7 @@
+FROM node
+ARG GIT_COMMIT
+ENV GIT_COMMIT=${GIT_COMMIT}
+LABEL GIT_COMMIT=${GIT_COMMIT}
+WORKDIR /app
+COPY . .
+RUN echo "PORT=80 npm run serve:ssr" > run.sh

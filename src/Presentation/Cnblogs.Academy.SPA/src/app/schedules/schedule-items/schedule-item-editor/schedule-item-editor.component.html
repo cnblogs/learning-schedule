@@ -1,0 +1,25 @@
+<form #itemForm="ngForm" (ngSubmit)="itemForm.form.valid ? save() : null" (keydown.esc)="close()">
+  <div class="d-flex flex-wrap">
+    <div class="flex-grow-1 row">
+      <div class="d-flex col-md-auto col-sm-12 flex-grow-1">
+        <div class="d-flex flex-column justify-content-center mr-2">
+          <input type="checkbox" class="circle-check ml-sm-2" disabled [checked]="item.completed">
+        </div>
+        <textarea name="title" [value]="item.title" [(ngModel)]="item.title" [ngModelOptions]="{updateOn: 'submit'}"
+                  #input="ngModel" minlength="2" maxlength="5000" class="slim gray-666 py-2 ph" rows=1 autosize
+                  placeholder="添加学习任务" (keypress)="onEnter($event,sub)"></textarea>
+      </div>
+      <div *ngIf="input.invalid && (input.dirty || input.touched)" class="ml-4 col-md-auto col-sm-6 d-flex">
+        <small class="text-danger align-self-center">
+          <span *ngIf="input?.errors?.minlength">不能少于2个字</span>
+          <span *ngIf="input?.errors?.maxlength">不能超过5000个字</span>
+        </small>
+      </div>
+    </div>
+    <div class="align-self-center col-sm-12 col-md-auto d-flex justify-content-end">
+      <button type="submit" class="btn btn-outline-primary btn-sm no-border" #sub>保存</button>
+      <button type="reset" (click)="close()" class="btn btn-outline-secondary btn-sm no-border">取消</button>
+    </div>
+
+  </div>
+</form>

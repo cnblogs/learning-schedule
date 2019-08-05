@@ -1,0 +1,43 @@
+<div class="">
+  <ul class="list-group">
+    <ng-container *ngIf="subtasks">
+      <li *ngFor="let subtask of subtasks" class="list-group-item border-0 d-flex flex-nowrap">
+        <div class="d-flex flex-grow-1">
+          <div class="mr-1 align-self-center">
+            <input type="checkbox" class="circle-sm-check" [checked]="subtask.dateEnd"
+                   (click)="completeSubtask(subtask,$event)" [disabled]="!owner">
+          </div>
+          <span class="flex-grow-1 border-bottom small pt-1" *appBoard="subtask.id"
+                (click)="edit(subtask.id)">{{subtask.content}}</span>
+          <div *appModal="subtask.id" class="border-bottom flex-grow-1">
+            <app-schedule-item-subtask-editor [itemId]="itemId" [subtask]="subtask"
+                                              (closed)="modalSvc.close(subtask.id)"
+                                              (subtaskUpdated)="updateSubtask($event,subtask);modalSvc.close(subtask.id)">
+            </app-schedule-item-subtask-editor>
+          </div>
+        </div>
+        <div class="ml-auto v-hidden" *ngIf="itemOwner">
+          <span class="oi oi-x gray-999-i point mx-2" (click)="delSubtask(subtask)"></span>
+        </div>
+      </li>
+    </ng-container>
+    <li class="list-group-item border-0" *ngIf="itemOwner">
+      <div *appBoard="'newTask'" [modalOpen]="'newTask'">
+        <img src="/assets/addition.svg" class="gray-icon small-icon mr-1">
+        <small>添加子任务</small>
+      </div>
+      <div *appModal="'newTask'" class="d-flex">
+        <div class="mr-1 align-self-center">
+          <input type="checkbox" class="circle-sm-check" disabled>
+        </div>
+        <div class="flex-grow-1">
+          <app-schedule-item-subtask-editor [itemId]="itemId" (subtaskAdded)="addSubtask($event)"
+                                            (closed)="modalSvc.close('newTask')">
+          </app-schedule-item-subtask-editor>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <div>
+  </div>
+</div>

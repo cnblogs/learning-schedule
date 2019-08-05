@@ -1,0 +1,12 @@
+FROM microsoft/dotnet:2.2-aspnetcore-runtime
+
+ENV TZ=Asia/Shanghai
+
+WORKDIR /app
+
+COPY ./bin/Debug/netcoreapp2.2/publish .
+
+HEALTHCHECK --interval=60s --timeout=20s \
+    CMD curl -fs -o /dev/null localhost/alive || exit 1
+
+ENTRYPOINT ["dotnet", "Cnblogs.Academy.Web.dll"]

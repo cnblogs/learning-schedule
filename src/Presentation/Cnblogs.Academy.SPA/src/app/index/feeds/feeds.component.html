@@ -1,0 +1,23 @@
+<div class="">
+  <div *ngIf="self" class="d-flex justify-content-start content-sm-center">
+    <ul class="nav mb-3">
+      <li class="nav-item left" [class.active]="!myself"><a [routerLink]="['./']">全部</a>
+      </li>
+      <li class="nav-item" [class.active]="myself"><a [routerLink]="['./']" fragment="myself">个人</a></li>
+    </ul>
+  </div>
+  <div *ngIf="!!!feeds">
+    <ngx-loading [show]="true"></ngx-loading>
+  </div>
+  <div *ngIf="feeds">
+    <div *ngIf="feeds.length<1">
+      <small>没有动态</small>
+    </div>
+    <div *ngFor="let feed of feeds | paginate: config" class="mb-3">
+      <app-feed-item [feed]="feed"></app-feed-item>
+    </div>
+    <div *ngIf="feeds">
+      <app-paging [config]="config"></app-paging>
+    </div>
+  </div>
+</div>

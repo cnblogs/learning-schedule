@@ -1,0 +1,5 @@
+<form #newsb="ngForm" (submit)="submit(isb)" class="d-flex flex-nowrap">
+  <textarea placeholder="添加子任务" #isb (keyup.esc)="close()" (blur)="blur(isb)"
+            class="no-outline border-0 w-100 gray-666 small" appFocusOnShow [value]="subtask?.content" autosize rows=1
+            (keypress)="enter($event,isb)"></textarea>
+</form>

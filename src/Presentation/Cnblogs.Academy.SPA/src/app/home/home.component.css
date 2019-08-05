@@ -1,0 +1,13 @@
+.title-card {
+  border-left: solid 3px #FACD01 ;
+  padding-left: .5rem;
+  color: #7ab97c !important;
+}
+
+.portrait {
+  border-radius: 100%;
+}
+
+.active {
+  color: #7ab97c;
+}

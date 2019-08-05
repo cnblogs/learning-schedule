@@ -1,0 +1,33 @@
+ul {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  margin: 25px 0;
+  text-align: center;
+  color: #999999;
+  overflow: hidden;
+  letter-spacing: 0;
+}
+
+ul li {
+  display: inline-block;
+  list-style: none;
+}
+
+.item a {
+  background: #FFFFFF;
+  border-radius: 4px;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 38px;
+  border: 1px solid #E9E9E9;
+  cursor: pointer;
+  text-decoration: none;
+  color: #999999;
+}
+
+.item.current a {
+  background-color: #FACD01;
+  color: #FFFFFF;
+}

@@ -1,0 +1,6 @@
+@import "../../schedule-header-editor/schedule-header-editor.component.css";
+
+.slim {
+  font-weight: normal;
+  word-break: break-word;
+}

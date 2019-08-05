@@ -1,0 +1,27 @@
+<pagination-template #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event">
+
+  <ul (click)="onChange()" class="">
+    <li class="item mr-sm-1" *ngIf="!p.isFirstPage()">
+      <a [routerLink]="['./']" [queryParams]="{page:p.getCurrent()-1}" fragment="{{fragment}}">
+        <span>&lt;</span>
+      </a>
+    </li>
+
+    <li *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value" class="item mx-sm-1">
+      <a *ngIf="p.getCurrent() !== page.value" [routerLink]="['./']" [queryParams]="{page: page.value}"
+         fragment="{{fragment}}">
+        <span>{{ page.label }}</span>
+      </a>
+      <a *ngIf="p.getCurrent() === page.value" (click)="noBub($event)">
+        <span>{{ page.label }}</span>
+      </a>
+    </li>
+
+    <li class="item ml-sm-1" *ngIf="!p.isLastPage()">
+      <a [routerLink]="['./']" [queryParams]="{ page:p.getCurrent()+1 }" fragment="{{fragment}}">
+        <span>&gt;</span>
+      </a>
+    </li>
+  </ul>
+
+</pagination-template>

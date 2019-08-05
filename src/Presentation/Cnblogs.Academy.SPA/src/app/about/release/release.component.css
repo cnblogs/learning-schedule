@@ -1,0 +1,20 @@
+.right-border {
+  border-right: solid 2px #e1e4e8;
+  position: relative;
+}
+
+.right-node::after {
+  background-color: #e1e4e8;
+  border: 2px solid #fff;
+  border-radius: 6px;
+  box-sizing: border-box;
+  content: " ";
+  display: block;
+  height: 12px;
+  margin-top: -6px;
+  position: absolute;
+  right: -7px;
+  top: 50%;
+  width: 12px;
+  z-index: 10;
+}

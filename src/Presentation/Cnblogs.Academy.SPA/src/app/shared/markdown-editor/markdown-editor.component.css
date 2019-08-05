@@ -1,0 +1,57 @@
+.hidden {
+  display: none;
+}
+
+.md {
+  border: solid 1px #E6E2E2;
+  border-radius: 4px;
+  padding: .5rem 1rem;
+  letter-spacing: 1px;
+}
+
+ul {
+  display: flex;
+  flex-flow: row nowrap;
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 0;
+  border-bottom: solid 1px #E6E2E2;
+}
+
+ul li a {
+  color: inherit;
+  text-decoration: none;
+  padding: 0 10px 10px 10px;
+  display: block;
+  font-size: 14px;
+}
+
+ul li.active a {
+  color: #104B9B;
+  border-bottom: #104B9B solid 2px;
+  font-weight: bold;
+}
+
+textarea {
+  border: none;
+  border-bottom: solid 1px #E6E2E2;
+  border-radius: 0;
+  outline: none;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  position: relative;
+  top:-1px;
+}
+
+.preview {
+  min-height: 10rem;
+}
+
+input {
+  border: transparent;
+  width: 100%;
+  border-bottom: 1px solid #ced4da;
+  outline: transparent;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}

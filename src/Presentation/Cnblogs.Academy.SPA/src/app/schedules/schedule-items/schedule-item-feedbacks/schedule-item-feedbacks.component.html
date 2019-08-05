@@ -1,0 +1,18 @@
+<div>
+  <form #fb="ngForm">
+    <label for="customRange2"><small>难易程度</small></label>
+    <div class="d-flex py-2">
+      <small>易</small>
+      <input type="range" class="custom-range" min="1" max="3" id="customRange2" name="difficulty"
+             [(ngModel)]="feedback.difficulty" [disabled]="!owner" (change)="save()">
+      <small>难</small>
+    </div>
+    <div>
+      <div>
+        <textarea class="border-0 no-outline w-100 gray-666 small" placeholder="反馈学习体验" rows=3 autosize
+                  (keypress)="enter($event)" (blur)="save()" name="content" [(ngModel)]="feedback.content"
+                  [disabled]="!owner"></textarea>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,43 @@
+@import "../schedule-index/schedule-index.component.css";
+
+.circle-check:disabled{
+  opacity: .5;
+}
+
+.light-row .light-ellipses {
+  visibility: hidden;
+}
+
+.light-row:hover .light-ellipses {
+  visibility: visible;
+}
+
+@media (pointer: coarse) {
+  .light-row .light-ellipses {
+    display: none !important;
+  }
+}
+
+.text-secondary-light {
+  color: #a0a2a0 !important;
+}
+
+.oi-rel {
+  position: relative;
+  top: -1px;
+  left: 0;
+}
+
+.abs-right-top {
+  position: absolute;
+  right: .5rem;
+  top: .2rem;
+}
+
+.primary-green {
+  color: #85c484;
+}
+
+.min-height-500 {
+  min-height: 500px;
+}

@@ -1,0 +1,29 @@
+<div class="gray-666">
+  <div class="card" *ngIf="user">
+    <div class="d-flex justify-content-center my-3 position-releative">
+      <a href="{{'//home.cnblogs.com/u/'+alias}}">
+        <img src="{{user.avatar}}" class="portrait">
+      </a>
+    </div>
+    <p class="text-center">
+      <a href="{{'//home.cnblogs.com/u/'+alias}}" class="gray-666">
+        <b [innerHTML]="user.name"></b>
+      </a>
+    </p>
+  </div>
+
+  <div class="card mt-3">
+    <ul class="nav pt-3 px-3 justify-content-center">
+      <li class="nav-item mr-2" [routerLinkActive]="['active']">
+        <a [routerLink]="['./','feeds']" class="gray-666">动态</a>
+      </li>
+      <li class="nav-item ml-2" [routerLinkActive]="['active']">
+        <a [routerLink]="['./','schedules','target']" class="gray-666">学习计划</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="pt-4">
+    <router-outlet></router-outlet>
+  </div>
+</div>

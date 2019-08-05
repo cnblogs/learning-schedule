@@ -1,0 +1,78 @@
+@import "../schedules.scss";
+
+.plain-text {
+  color: #104B9B;
+  letter-spacing: 1.5px;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 1rem;
+}
+
+li .content {
+  margin-left: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.card {
+  margin-top: 20px;
+  min-height: 200px;
+  padding: 1rem 1rem 2.5rem 1rem;
+}
+
+.btn {
+  border-radius: 4px;
+}
+
+.btn-none {
+  background-color: transparent;
+}
+
+.form-control {
+  font-weight: bolder;
+  padding: 3px;
+}
+
+button.oi {
+  color: inherit;
+  border: none;
+  background-color: transparent;
+  padding: unset;
+  margin: unset;
+  outline: unset;
+}
+
+.absolute-top {
+  position: absolute;
+  top: 1rem;
+  right: 0;
+  left: 0;
+  padding: 1rem;
+}
+
+.card-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #FFFFFF;
+  z-index: 1000;
+  border-radius: 6px;
+}
+
+@media (pointer: coarse) {
+  .pan-container {
+    position: relative;
+    background-color: #fff;
+  }
+}
+
+.vh-50 {
+  height: 50vh;
+}
+
+.bb {
+  border-bottom: solid 1px #f5f0f0;
+}

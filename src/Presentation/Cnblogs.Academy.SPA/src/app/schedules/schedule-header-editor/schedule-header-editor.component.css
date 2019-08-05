@@ -1,0 +1,105 @@
+@import "../schedule/schedule.component.css";
+
+.hr {
+  border-top: 1px solid #eeeeee;
+  padding-top: 1rem;
+}
+
+.no-border {
+  border: none;
+  border-radius: 2px;
+}
+
+.btn-outline-primary.no-border {
+  color: #85c485;
+}
+
+.btn-outline-primary.no-border:hover {
+  background-color: #85c485;
+  color: #ffffff;
+}
+
+.no-border:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+.slim {
+  flex-grow: 1;
+  min-height: 2rem;
+  outline: 0;
+  border: none;
+  font-weight: bold;
+  -webkit-appearance: none;
+  border-radius: 0;
+  letter-spacing: 1.5px;
+}
+
+.ph::-webkit-input-placeholder {
+  font-weight: normal;
+  opacity: .5;
+}
+
+.ph:-moz-placeholder { /* Firefox 18- */
+  font-weight: normal;
+  opacity: .5;
+}
+
+.ph::-moz-placeholder {  /* Firefox 19+ */
+  font-weight: normal;
+  opacity: .5;
+}
+
+.ph:-ms-input-placeholder {
+  font-weight: normal;
+  opacity: .5;
+}
+
+.font-small {
+  font-size: 14px;
+}
+
+.radio {
+  appearance: none;
+  border: 1px solid #999999;
+  border-radius: 100%;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  position: relative;
+  outline: transparent;
+  cursor: default;
+  vertical-align: sub;
+}
+
+.radio:checked {
+  border-color: #bbbbbb;
+  background-color: #ffffff;
+}
+
+.radio:checked::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 100%;
+  position: absolute;
+  top: calc(50% - 3px);
+  left: calc(50% - 3px);
+  background-color: #85c485;
+}
+
+.radio:disabled {
+  opacity: .5;
+}
+
+.radio:focus {
+  border: 1px solid #85c485;
+}
+
+@media (min-width: 576px) {
+  .px-md {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}

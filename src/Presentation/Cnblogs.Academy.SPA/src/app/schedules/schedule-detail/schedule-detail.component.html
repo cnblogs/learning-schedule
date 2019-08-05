@@ -1,0 +1,25 @@
+<div *ngIf="!!!schedule" class="gray-666 mt-5">
+  <p>目标已经不存在了...</p>
+  <a [routerLink]="['/']">返回首页</a>
+</div>
+<div class="" *ngIf="schedule">
+  <ngx-loading [show]="schedule.id < 0"></ngx-loading>
+  <div *ngIf="schedule.id > 0">
+    <div class="d-flex mb-3">
+      <div class="mr-2">
+        <a [routerLink]="['/u',schedule.user.alias]"><img class="portrait" src="{{schedule.user.icon}}"></a>
+      </div>
+      <div class="d-flex flex-column gray-666">
+        <a [routerLink]="['/u',schedule.user.alias]" class="gray-666"><span [innerHTML]="schedule.user.userName"></span></a>
+        <time class="small gray-999">{{schedule.dateAdded | amDateFormat:"YYYY年MM月DD日 HH:mm"}} 创建</time>
+      </div>
+    </div>
+    <app-schedule [schedule]="schedule" (delete)="deleted=true" *ngIf="!deleted"></app-schedule>
+    <div *ngIf="deleted">
+      已删除「{{schedule.title}}」,返回
+      <a [routerLink]="['/']">学院首页</a>
+      /
+      <a [routerLink]="['/u', schedule.user.alias]">个人主页</a>
+    </div>
+  </div>
+</div>

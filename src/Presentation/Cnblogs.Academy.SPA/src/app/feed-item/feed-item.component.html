@@ -1,0 +1,30 @@
+<div class="card flex-row p-3">
+  <div class="mr-2">
+    <a [routerLink]="['/u',feed.alias]">
+      <img src="{{feed.icon}}" class="portrait">
+    </a>
+  </div>
+  <div class="d-flex flex-column w-100 ml-2">
+    <div class="d-flex">
+      <p class="mb-0">
+        <a [routerLink]="['/u',feed.alias]" class="gray-999">
+          <small [innerHTML]="feed.userName"></small>
+        </a>
+        <time class="small gray-999 mx-2">{{feed.dateAdded | amLocale: 'zh-cn' | amTimeAgo}}</time>
+        <small [ngSwitch]="feed.feedType" class="gray-999">
+          <span *ngSwitchCase="20" class="mb-0">创建了新目标：</span>
+          <span *ngSwitchCase="21" class="mb-0">创建了新任务：</span>
+          <span *ngSwitchCase="22" class="mb-0">完成了任务：</span>
+          <span *ngSwitchCase="23" class="mb-0">完成了目标：</span>
+        </small>
+      </p>
+      <img *ngIf="feed.isPrivate" class="ml-auto" src="/assets/private.svg">
+    </div>
+    <hr class="my-1 w-100">
+    <div class="d-flex">
+      <div class="mr-2"><input type="checkbox" class="circle-check cursor-default" disabled
+               [checked]="isCompletedType(feed.feedType)"></div>
+      <a [routerLink]="subPath(feed.link)" class="gray-666">{{feed.feedTitle}}</a>
+    </div>
+  </div>
+</div>

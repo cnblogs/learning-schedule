@@ -1,0 +1,25 @@
+.portrait {
+  border-radius: 100%;
+  width: 6rem;
+  height: 6rem;
+}
+
+.active a {
+  display: block;
+  border-bottom: 3px solid #FACD01;
+  padding-bottom: .5rem;
+}
+
+.nav a {
+  text-decoration: none;
+}
+
+.nav a:hover {
+  color: #333333;
+}
+
+.ab-r-t {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+}

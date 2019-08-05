@@ -1,0 +1,14 @@
+.shadow-pannel {
+  background-color: rgba(0, 0, 0,.02);
+  width: 80%;
+}
+
+@media (max-width: 567px) {
+  .shadow-pannel {
+    width: 20%;
+  }
+}
+
+.overflow-auto {
+  overflow-y: auto;
+}
