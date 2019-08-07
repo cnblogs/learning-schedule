@@ -20,7 +20,7 @@ namespace Cnblogs.Academy.WebAPI.Setup
             }
             else
             {
-                context.Response.Redirect("//passport.cnblogs.com/user/signin?ReturnUrl=" + WebUtility.UrlEncode(context.Request.GetAbsoluteUri()));
+                context.Response.Redirect("//account.cnblogs.com/signin?ReturnUrl=" + WebUtility.UrlEncode(context.Request.GetAbsoluteUri()));
             }
         }
     }

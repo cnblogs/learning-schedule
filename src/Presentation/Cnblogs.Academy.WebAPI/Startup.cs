@@ -8,6 +8,7 @@ using Cnblogs.Academy.WebAPI.Setup;
 using Cnblogs.CAP.RedisUtility;
 using Cnblogs.Academy.Domain;
 using Cnblogs.Academy.Repositories;
+using Cnblogs.Academy.ServiceAgent.UCenterService;
 using DotNetCore.CAP;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -15,7 +16,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using StackExchange.Redis;
 
 namespace Cnblogs.Academy.WebAPI
 {
@@ -37,51 +37,56 @@ namespace Cnblogs.Academy.WebAPI
             AppConst.AppId = Configuration["AppId"];
             AppConst.DomainAddress = Configuration.GetValue<string>("DomainAddress");
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            services.AddEntityFrameworkSqlServer().AddDbContextPool<AcademyContext>((serviceProvider, options) =>
-            {
-                options.UseSqlServer(Configuration.GetConnectionString("Academy"), x => x.UseRowNumberForPaging());
-                options.UseApplicationServiceProvider(serviceProvider);
-            }, poolSize: 64);
-
-            services.AddAcademy(Environment, Configuration).AddCap(options =>
-            {
-                options.UseEntityFramework<AcademyContext>(x => { x.UseSqlServer2008(); });
-
-                options.Version = Configuration.GetValue<string>("Cap:Version");
-
-                var mq = new RabbitMQOptions();
-                Configuration.GetSection("RabbitMq").Bind(mq);
-                options.UseRabbitMQ(cfg =>
+            services.AddEntityFrameworkSqlServer().AddDbContextPool<AcademyContext>(
+                (serviceProvider, options) =>
                 {
-                    cfg.HostName = mq.HostName;
-                    cfg.Port = mq.Port;
-                    cfg.UserName = mq.UserName;
-                    cfg.Password = mq.Password;
+                    options.UseSqlServer(Configuration.GetConnectionString("Academy"), x => x.UseRowNumberForPaging());
+                    options.UseApplicationServiceProvider(serviceProvider);
+                },
+                poolSize: 64);
+
+            services.AddAcademy(Environment, Configuration).AddCap(
+                options =>
+                {
+                    options.UseEntityFramework<AcademyContext>(x => { x.UseSqlServer2008(); });
+
+                    options.Version = Configuration.GetValue<string>("Cap:Version");
+
+                    var mq = new RabbitMQOptions();
+                    Configuration.GetSection("RabbitMq").Bind(mq);
+                    options.UseRabbitMQ(
+                        cfg =>
+                        {
+                            cfg.HostName = mq.HostName;
+                            cfg.Port = mq.Port;
+                            cfg.UserName = mq.UserName;
+                            cfg.Password = mq.Password;
+                        });
+
+                    options.UseDashboard(
+                        d =>
+                        {
+                            d.PathMatch = "/academy/cap";
+                        });
                 });
 
-                options.UseDashboard(d =>
+            services.AddBeatPulse(
+                x =>
                 {
-                    d.PathMatch = "/academy/cap";
+                    x.AddSqlServer(Configuration.GetConnectionString("Academy"));
                 });
-            });
-
-            services.AddBeatPulse(x =>
-            {
-                x.AddSqlServer(Configuration.GetConnectionString("Academy"));
-            });
 
             var redisConn = RedisManager.Connect(Configuration.GetSection("redis"), out var redisConnectionString);
             services.AddSingleton(redisConn);
             services.AddSingleton<RedisUtility>();
 
-//            services.AddCnblogsAuthentication(redisConn, redisConnectionString,
-//                option => { option.Events = new CnblogsCookieAuthenticationEvents(); });
+            services.AddCnblogsAuthentication(redisConn, redisConnectionString);
 
-            services.AddMvc(options =>
-            {
-                options.Filters.Add<ExceptionFilter>();
-                // options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(
+                options =>
+                {
+                    options.Filters.Add<ExceptionFilter>();
+                }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddTransient<ServiceAgent.MarkdownApi.AutoLinkTitleService>();
 
@@ -93,8 +98,6 @@ namespace Cnblogs.Academy.WebAPI
             return new AutofacServiceProvider(container.Build());
         }
 
-
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -104,12 +107,13 @@ namespace Cnblogs.Academy.WebAPI
             }
             else
             {
+                // TODO: add custom error pages
 //                app.UseCustomErrorPages();
             }
 
             app.UseStaticFiles();
 
-//            app.UseCnblogsCookieAuthentication().UseUCenter();
+            app.UseAuthentication().UseUCenter();
 
             app.UseMvc();
         }

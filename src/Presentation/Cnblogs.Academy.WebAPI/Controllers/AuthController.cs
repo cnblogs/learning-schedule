@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Cnblogs.Academy.Common;
 using Cnblogs.Academy.Domain;
 using Cnblogs.Academy.ServiceAgent.MsgApi;
+using Cnblogs.Academy.ServiceAgent.UCenterService;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Cnblogs.Academy.WebAPI.Controllers
