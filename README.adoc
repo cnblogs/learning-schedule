@@ -1,0 +1,64 @@
+= 学习计划
+:toc:
+
+== 准备开发环境
+
+.需要安装的工具
+* docker
+* docker-compose
+* dotnet-sdk 2.x
+* nodejs LTS
+* bash
+
+=== 修改 HOST 文件
+
+在 hosts 文件中添加下面的解析：
+
+----
+127.0.0.1   redis
+127.0.0.1   dbserver
+127.0.0.1   memcached
+127.0.0.1   rabbit
+127.0.0.1   mongo
+127.0.0.1   learning.cnblogs.com
+127.0.0.1   identity.cnblogs.com
+----
+
+=== 启动 docker-compose
+
+[source, bash]
+----
+$ cd ./scripts/learning-env
+$ docker-compose up -d
+----
+
+NOTE: 请确保本地的 80 端口没有被占用
+
+=== 启动 API Mock 项目
+
+[source, bash]
+----
+$ cd ./src/Mock/APIMock
+$ dotnet run --launch-profile APIMock
+----
+
+== 运行学习计划
+
+.启动 SPA 项目
+[source, bash]
+----
+$ cd ./src/Presentation/Cnblogs.Academy.SPA
+$ npm start
+----
+
+.启动 API 项目
+[source, bash]
+----
+$ cd ./src/Presentation/Cnblogs.Academy.WebAPI
+$ dotnet run --launch-profile Cnblogs.Academy.Web
+----
+
+=== 如何登录帐号
+
+打开浏览器，输入 `http://identity.cnblogs.com/users/cookie?loginName=随便一个用户名&isPersistent=true` 就可以获取到 Cookie。
+
