@@ -37,7 +37,8 @@ namespace Cnblogs.Academy.WebAPI.Setup
             services.AddTransient<ICategoryService, CategoryService>();
 
             services.AddTransient<IMarkdownApiService, MarkdownService>();
-            services.AddUCenter();
+            var hostConfig = config.GetSection("Host");
+            services.AddUCenter(hostConfig["UCenter"]);
 
             if (env.IsDevelopment())
             {
@@ -45,15 +46,15 @@ namespace Cnblogs.Academy.WebAPI.Setup
                 services.AddTransient<IHotCommentApiService, HotCommentApiService>()
                     .AddHttpClient(
                         "comment",
-                        cfg => { cfg.BaseAddress = new Uri(config.GetSection("Host")["Comment"]); })
+                        cfg => { cfg.BaseAddress = new Uri(hostConfig["Comment"]); })
                     .AddTypedClient(Refit.RestService.For<IHotCommentApi>);
 
                 services.AddTransient<IThumbupApiService, ThumbupApiService>()
-                    .AddHttpClient("vote", cfg => { cfg.BaseAddress = new Uri(config.GetSection("Host")["Vote"]); })
+                    .AddHttpClient("vote", cfg => { cfg.BaseAddress = new Uri(hostConfig["Vote"]); })
                     .AddTypedClient(Refit.RestService.For<IThumbupApi>);
 
                 services.AddTransient<IFeedsAppService, FeedsAppService>()
-                    .AddHttpClient("feeds", cfg => { cfg.BaseAddress = new Uri(config.GetSection("Host")["Feeds"]); })
+                    .AddHttpClient("feeds", cfg => { cfg.BaseAddress = new Uri(hostConfig["Feeds"]); })
                     .AddTypedClient(Refit.RestService.For<IFeedsApi>);
 
                 services.AddTransient<IUserRelationGroupService, UserRelationGroupService>()
@@ -61,9 +62,16 @@ namespace Cnblogs.Academy.WebAPI.Setup
                         "relation",
                         cfg =>
                         {
-                            cfg.BaseAddress = new Uri(config.GetSection("Host")["Relation"]);
+                            cfg.BaseAddress = new Uri(hostConfig["Relation"]);
                         })
                     .AddTypedClient(Refit.RestService.For<IUserRelationGroupApi>);
+
+                services.AddHttpClient(
+                    "ucenter",
+                    cfg =>
+                    {
+                        cfg.BaseAddress = new Uri(hostConfig["UCenter"]);
+                    }).AddTypedClient(Refit.RestService.For<IUcenterApi>);
             }
             else
             {
@@ -91,14 +99,14 @@ namespace Cnblogs.Academy.WebAPI.Setup
                             cfg.BaseAddress = new Uri("http://relation_api");
                         })
                     .AddTypedClient(Refit.RestService.For<IUserRelationGroupApi>);
-            }
 
-            services.AddHttpClient(
-                "ucenter",
-                cfg =>
-                {
-                    cfg.BaseAddress = new Uri("http://ucenter_api");
-                }).AddTypedClient(Refit.RestService.For<IUcenterApi>);
+                services.AddHttpClient(
+                    "ucenter",
+                    cfg =>
+                    {
+                        cfg.BaseAddress = new Uri("http://ucenter_api");
+                    }).AddTypedClient(Refit.RestService.For<IUcenterApi>);
+            }
 
             services.AddTransient<IAccountEventSubscriber, AccountEventSubscriber>();
             services.AddTransient<IScheduleEventHandler, ScheduleEventHandler>();

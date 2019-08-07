@@ -76,11 +76,7 @@ namespace Cnblogs.Academy.WebAPI
                     x.AddSqlServer(Configuration.GetConnectionString("Academy"));
                 });
 
-            var redisConn = RedisManager.Connect(Configuration.GetSection("redis"), out var redisConnectionString);
-            services.AddSingleton(redisConn);
-            services.AddSingleton<RedisUtility>();
-
-            services.AddCnblogsAuthentication(redisConn, redisConnectionString);
+            services.AddCnblogsAuthentication(Configuration);
 
             services.AddMvc(
                 options =>
