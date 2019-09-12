@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Cnblogs.Common" Version="1.0.5" />
+    <PackageReference Include="Cnblogs.UCenter.ServiceAgent" Version="2.3.2" />
+    <PackageReference Include="NUglify" Version="1.5.13" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
+    <PackageReference Include="StackExchange.Redis.StrongName" Version="1.9.3" />
+    <PackageReference Include="MediatR" Version="7.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="DotNetCore.CAP" Version="2.6.0" />
+    <PackageReference Include="DotNetCore.CAP.RabbitMQ" Version="2.6.0" />
+    <PackageReference Include="DotNetCore.CAP.SqlServer" Version="2.6.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cnblogs.Domain.Abstract\Cnblogs.Domain.Abstract.csproj" />
+  </ItemGroup>
+</Project>
