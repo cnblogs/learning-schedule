@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Bogus" Version="28.0.3" />
+    <PackageReference Include="AngleSharp" Version="0.12.1" />
+    <PackageReference Include="Cnblogs.Common" Version="1.0.5" />
+    <PackageReference Include="Mapster" Version="4.1.0" />
+    <PackageReference Include="Markdig" Version="0.17.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.2.0" />
+    <PackageReference Include="NPinyinCore" Version="0.2.0" />
+    <PackageReference Include="refit" Version="4.7.51" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Application\Cnblogs.Academy.DTO\Cnblogs.Academy.DTO.csproj" />
+  </ItemGroup>
+</Project>
