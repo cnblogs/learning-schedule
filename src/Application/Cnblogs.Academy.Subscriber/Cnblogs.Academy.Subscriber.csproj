@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\Cnblogs.Academy.DTO\Cnblogs.Academy.DTO.csproj" />
+    <ProjectReference Include="..\Cnblogs.Academy.Application\Cnblogs.Academy.Application.csproj" />
+    <ProjectReference Include="..\..\Domain\Cnblogs.Academy.Events\Cnblogs.Academy.Events.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Cnblogs.Feed.ServiceAgent" Version="1.0.1" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+</Project>
