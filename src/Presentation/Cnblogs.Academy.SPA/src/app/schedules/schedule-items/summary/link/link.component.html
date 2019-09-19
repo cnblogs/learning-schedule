@@ -1,0 +1,32 @@
+<div class="pl-2 mb-2">
+  <div class="border-top" *ngIf="!readonly">
+    <div class="">
+      <small class="mr-2">总结</small>
+      <small (click)="nopop($event)">
+        <button class="btn btn-link btn-sm pl-0 iconfont icon-guanlian" (click)="link_open=!link_open"> 关联博文</button>
+        <button class="btn btn-link btn-sm iconfont icon-wenzhang" (click)="openBlogAdmin()"> 写新博文</button>
+      </small>
+    </div>
+  </div>
+
+  <div>
+    <div *ngIf="link_open" class="">
+      <div *ngIf="!readonly" class="mb-2 px-2 border border-top-0 border-right-0 border-radius">
+        <small class="pt-2">我的博文</small>
+        <app-link-edit [itemId]="itemId" [links]="links" (close)="link_open=false"></app-link-edit>
+      </div>
+    </div>
+  </div>
+
+  <div class="">
+    <ol *ngIf="links" class="pl-4">
+      <li *ngFor="let link of links" class="">
+        <small class="d-flex flex-row justify-content-between">
+          <a [href]="link.link" target="_blank" class="align-self-center">{{link.title}}</a>
+          <i class="btn btn-link btn-sm pointer iconfont icon-quxiaoguanlian1 align-self-start" (click)="removeLink(link.id)"
+             tooltip="取消关联" placement="right" display-mobile=false *ngIf="!readonly"></i>
+        </small>
+      </li>
+    </ol>
+  </div>
+</div>

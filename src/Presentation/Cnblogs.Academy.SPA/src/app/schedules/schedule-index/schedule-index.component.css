@@ -18,7 +18,7 @@ li .content {
 .card {
   margin-top: 20px;
   min-height: 200px;
-  padding: 1rem 1rem 2.5rem 1rem;
+  padding: 1rem 1rem 0rem 1rem;
 }
 
 .btn {

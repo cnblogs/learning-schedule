@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ScheduleItem } from '../schedule';
 import * as Enumerable from 'linq';
 import { ModalService } from '../modal/modal.service';
-import { trigger, transition, query, stagger, animate, style } from '@angular/animations';
 import { PanMenuService } from '../pan-menu/pan-menu.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PermissionService } from '../permission.service';
@@ -12,34 +11,31 @@ import { SwitcherService } from '../switcher.service';
   selector: 'app-schedule-items',
   templateUrl: './schedule-items.component.html',
   styleUrls: ['./schedule-items.component.css'],
-  animations: [
-    trigger('listAnimation', [
-      transition('* => *', [
-        query(':leave', [
-          stagger(100, [
-            animate('0s', style({ opacity: '0' })),
-            animate('0.2s', style({ height: '0px', opacity: '0', display: 'none' }))
-          ])
-        ], { optional: true })
-      ])
-    ])
-  ],
   providers: [
     ModalService
   ]
 })
 export class ScheduleItemsComponent implements OnInit {
   @Input() scheduleId: number;
-  @Input() source: ScheduleItem[];
   @Input() completed = false;
   @Input() owner = false;
   @Output() pageChanged = new EventEmitter();
   items: ScheduleItem[];
   pageIndex = 0;
-  pageSize = 100;
+  pageSize = 10;
   totalPage = 1;
   pageArray: number[];
   reanderDetailPannel = false;
+
+  private _source: ScheduleItem[];
+  @Input()
+  set source(value: ScheduleItem[]) {
+    this._source = value;
+    this.goToPage(0);
+  }
+  get source() {
+    return this._source;
+  }
 
   constructor(
     public modalSvc: ModalService,
@@ -70,7 +66,9 @@ export class ScheduleItemsComponent implements OnInit {
 
   ngOnInit() {
     this.source = this.source || [];
-    this.goToPage(this.completed ? 0 : -1);
+    if (!this.completed) {
+      this.goToPage(-1);
+    }
   }
 
   get hasPrev(): boolean {
@@ -79,10 +77,6 @@ export class ScheduleItemsComponent implements OnInit {
 
   get hasNext(): boolean {
     return this.pageIndex < this.totalPage - 1;
-  }
-
-  private scrollIntoView() {
-    this.pageChanged.emit();
   }
 
   goToPage(index = 0) {
@@ -98,43 +92,52 @@ export class ScheduleItemsComponent implements OnInit {
       source = source.select(x => {
         x.dateAdded = new Date(x.dateAdded);
         return x;
-      }).orderBy(x => x.dateAdded);
+      });
     }
-    this.items = source.skip(this.pageIndex * this.pageSize).take(this.pageSize).toArray();
+    if (index > -1) {
+      this.items = source.orderBy(x => x.id).skip(this.pageIndex * this.pageSize).take(this.pageSize).toArray();
+    } else {
+      this.items = source.orderByDescending(x => x.id).take(this.pageSize - 1).orderBy(x => x.id).toArray();
+    }
     this.pageArray = Array(this.totalPage).fill(null).map((x, i) => i);
   }
 
   next() {
     if (this.pageIndex < this.totalPage - 1) {
       this.pageIndex++;
-      this.goToPage(this.pageIndex);
-      this.scrollIntoView();
+      this.goto(this.pageIndex);
+      this.goto(this.pageIndex);
     }
   }
 
   prev() {
     if (this.pageIndex > 0) {
       this.pageIndex--;
-      this.goToPage(this.pageIndex);
-      this.scrollIntoView();
+      this.goto(this.pageIndex);
     }
   }
 
+  goto(page: number) {
+    this.goToPage(page);
+    this.pageChanged.emit();
+  }
+
   async delItem(itemId: number) {
-    this.source = this.source.filter(x => x.id !== itemId);
+    const i = this.source.findIndex(x => x.id === itemId);
+    this.source.splice(i, 1);
     if (this.items.length <= 1) {
-      this.goToPage(--this.pageIndex);
+      this.goto(--this.pageIndex);
     } else {
-      this.goToPage(this.pageIndex);
+      this.goto(this.pageIndex);
     }
   }
 
   async addItem(item: ScheduleItem) {
     this.source.push(item);
     if (this.items.length >= this.pageSize) {
-      this.goToPage(++this.pageIndex);
+      this.goto(++this.pageIndex);
     } else {
-      this.goToPage(this.pageIndex);
+      this.goto(this.pageIndex);
     }
   }
 }

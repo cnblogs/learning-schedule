@@ -1,0 +1,9 @@
+<div class="ml-4 pb-2">
+  <div *ngIf="summary" class="mb-2">
+    <app-note [itemId]="itemId" [note]="summary.note" [readonly]="readonly"></app-note>
+  </div>
+
+  <div *ngIf="summary" class="mb-2">
+    <app-link [itemId]="itemId" [links]="summary.links" [readonly]="readonly"></app-link>
+  </div>
+</div>

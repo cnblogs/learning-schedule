@@ -1,25 +1,26 @@
-<div class="card">
+<div class="card mt-0">
   <div class="h-100 d-flex flex-column flex-grow-1">
     <div *appBoard="schedule.id" class="light-row d-flex justify-content-between position-relative bb">
 
       <app-pan-menu (edit)="modalSvc.open(schedule.id)" (delete)="delSchedule(schedule.id);panSvc.closeMenu(ele)"
-                    (checked)="onClick();panSvc.closeMenu(ele)" [completed]="completed">
+                    (checked)="onClick();panSvc.closeMenu(ele)">
       </app-pan-menu>
 
       <div #ele class="d-flex light-prefix flex-grow-1 pan-container py-2" (panstart)="panSvc.panstart(ele,$event)"
            (panmove)="panMove($event,ele)" (panend)="panEnd(ele)">
-        <div class="d-flex flex-column justify-content-center mr-2">
-          <input type="checkbox" class="circle-check" (click)="onClick($event)" [checked]="schedule.dateEnd"
-                 [disabled]="!(isScheduleOwner() | async)">
+        <div class="mr-2 custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" (click)="onClick($event)" [checked]="schedule.dateEnd"
+                 [disabled]="!(isScheduleOwner() | async)" id="{{schedule.id}}-s">
+          <label class="custom-control-label custom-control-circle pointer" for="{{schedule.id}}-s"></label>
         </div>
-        <b>{{schedule.title}}</b>
+        <b><a [routerLink]="['/schedules/u/',schedule.user.alias,schedule.id]">{{schedule.title}}</a></b>
       </div>
 
       <div class="light-ellipses d-flex py-2" *ngIf="isScheduleOwner() | async">
-        <img src="/assets/edit.svg" class="point ml-2" [modalOpen]="schedule.id" tooltip="编辑学习目标" placement="bottom"
-             display-mobile=false>
-        <button class="oi oi-x gray-999-i point mx-2 oi-rel" (click)="delSchedule(schedule.id)" tooltip="删除学习目标"
-                placement="bottom" display-mobile=false></button>
+        <i class="iconfont iconfont-lg icon-editor btn-link point mx-2" (click)="openEdit(schedule.id)" tooltip="编辑学习计划"
+           placement="bottom" display-mobile=false></i>
+        <i class="iconfont iconfont-lg icon-empty mr-2 btn-link point" (click)="delSchedule(schedule.id)"
+           tooltip="删除学习计划" placement="bottom" display-mobile=false></i>
       </div>
     </div>
 
@@ -27,6 +28,8 @@
       <app-schedule-header-editor [schedule]="schedule" [completed]="completed" (cancel)="modalSvc.close(schedule.id)"
                                   (update)="updateSchedule($event)"></app-schedule-header-editor>
     </div>
+
+    <div #block></div>
 
     <div class="flex-grow-1 d-flex flex-column">
       <app-schedule-items [scheduleId]="schedule.id" [source]="schedule.items" class="d-flex flex-column flex-grow-1"
@@ -36,8 +39,9 @@
   </div>
 
   <div class="abs-right-top point" (click)="togglePrivate(schedule)" *ngIf="isScheduleOwner() | async">
-    <img *ngIf="schedule.isPrivate" src="/assets/private.svg" tooltip="仅自己可见" placement="bottom" display-mobile=false>
-    <span *ngIf="!schedule.isPrivate" class="oi oi-eye primary-green" tooltip="公开" placement="bottom"
-          display-mobile=false></span>
+    <span *ngIf="schedule.isPrivate" class="iconfont iconfont-lg icon-yanjing2 text-primary" tooltip="仅自己可见"
+          placement="bottom" display-mobile=false></span>
+    <span *ngIf="!schedule.isPrivate" class="iconfont iconfont-lg icon-yanjing1 text-primary" tooltip="公开"
+          placement="bottom" display-mobile=false></span>
   </div>
 </div>

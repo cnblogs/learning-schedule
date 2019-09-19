@@ -18,35 +18,22 @@ import { FormsModule } from '@angular/forms';
 import { AuthGuardService } from '../auth-guard.service';
 import { ScheduleDetailComponent } from './schedule-detail/schedule-detail.component';
 import { ScheduleListComponent } from './schedule-list/schedule-list.component';
-import { ScheduleNavComponent } from './schedule-nav/schedule-nav.component';
-import { ScheduleSubnavComponent } from './schedule-nav/schedule-subnav/schedule-subnav.component';
-import { ScheduleItemSubtasksComponent } from './schedule-items/schedule-item-subtasks/schedule-item-subtasks.component';
-import { ScheduleItemDetailComponent } from './schedule-items/schedule-item-detail/schedule-item-detail.component';
-import { ScheduleItemReferencesComponent } from './schedule-items/schedule-item-references/schedule-item-references.component';
-import { ScheduleItemCommentsComponent } from './schedule-items/schedule-item-comments/schedule-item-comments.component';
-import { ScheduleItemSubtaskEditorComponent } from './schedule-items/schedule-item-subtasks/schedule-item-subtask-editor/schedule-item-subtask-editor.component';
-import { ScheduleItemReferenceEditorComponent } from './schedule-items/schedule-item-references/schedule-item-reference-editor/schedule-item-reference-editor.component';
+import { ScheduleSubnavComponent } from './schedule-subnav/schedule-subnav.component';
 import { SwitcherService } from './switcher.service';
 import { ScheduleItemTitleComponent } from './schedule-items/schedule-item-title/schedule-item-title.component';
-import { ScheduleItemFeedbacksComponent } from './schedule-items/schedule-item-feedbacks/schedule-item-feedbacks.component';
+import { SummaryComponent } from './schedule-items/summary/summary.component';
+import { NoteEditComponent } from './schedule-items/summary/note-edit/note-edit.component';
+import { LinkEditComponent } from './schedule-items/summary/link-edit/link-edit.component';
+import { NoteComponent } from './schedule-items/summary/note/note.component';
+import { LinkComponent } from './schedule-items/summary/link/link.component';
 
 const routes: Routes = [
   {
-    path: 'study', component: ScheduleSubnavComponent, children: [
+    path: '', component: ScheduleSubnavComponent, children: [
       { path: 'doing', component: ScheduleIndexComponent },
       { path: 'done', component: ScheduleIndexComponent },
       { path: '', pathMatch: 'full', redirectTo: 'doing' }
     ]
-  },
-  {
-    path: 'teach', component: ScheduleSubnavComponent, data: { teach: true }, children: [
-      { path: 'doing', component: ScheduleIndexComponent },
-      { path: 'done', component: ScheduleIndexComponent },
-      { path: '', pathMatch: 'full', redirectTo: 'doing' }
-    ]
-  },
-  {
-    path: '', pathMatch: 'full', redirectTo: 'study'
   }
 ];
 
@@ -58,13 +45,10 @@ const routes: Routes = [
     SharedModule,
     MarkdownEditorModule,
     RouterModule.forChild([
-      {
-        path: 'u/:alias/:scheduleId', component: ScheduleDetailComponent, children: [
-          { path: 'item/:itemId/details', component: ScheduleItemDetailComponent },
-          { path: 'item/:itemId', redirectTo: 'item/:itemId/details' }
-        ]
-      },
-      { path: 'u/:alias/:scheduleId/detail/:itemId', redirectTo: 'u/:alias/:scheduleId/item/:itemId/details' },
+      { path: 'u/:alias/:scheduleId', component: ScheduleDetailComponent },
+      { path: 'u/:alias/:scheduleId/item/:itemId/details', redirectTo: 'u/:alias/:scheduleId' },
+      { path: 'u/:alias/:scheduleId/item/:itemId', redirectTo: 'u/:alias/:scheduleId' },
+      { path: 'u/:alias/:scheduleId/detail/:itemId', redirectTo: 'u/:alias/:scheduleId' },
       {
         path: 'target', children: routes, data: { target: true }
       },
@@ -84,19 +68,21 @@ const routes: Routes = [
     ScheduleComponent,
     ScheduleDetailComponent,
     ScheduleListComponent,
-    ScheduleNavComponent,
     ScheduleSubnavComponent,
-    ScheduleItemSubtasksComponent,
-    ScheduleItemDetailComponent,
-    ScheduleItemReferencesComponent,
-    ScheduleItemCommentsComponent,
-    ScheduleItemSubtaskEditorComponent,
-    ScheduleItemReferenceEditorComponent,
     ScheduleItemTitleComponent,
-    ScheduleItemFeedbacksComponent
+    SummaryComponent,
+    NoteEditComponent,
+    LinkEditComponent,
+    NoteComponent,
+    LinkComponent,
   ],
   providers: [
     SwitcherService
+  ],
+  exports: [
+    ScheduleItemTitleComponent,
+    ScheduleItemEditorComponent,
+    ScheduleHeaderEditorComponent
   ]
 })
 export class SchedulesModule { }

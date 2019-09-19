@@ -22,6 +22,7 @@ export class ScheduleItemTitleComponent implements OnInit {
   @Output() update = new EventEmitter();
   @Output() open = new EventEmitter();
   @Output() delete = new EventEmitter();
+  summary_open = false;
   constructor(
     public panSvc: PanMenuService,
     private svc: SchedulesService,
@@ -51,6 +52,7 @@ export class ScheduleItemTitleComponent implements OnInit {
         if (result.success) {
           item.completed = false;
           this.toastr.success('已取消');
+          this.summary_open = false;
           this.update.emit(item);
         } else {
           this.toastr.error(result.message);
@@ -65,6 +67,9 @@ export class ScheduleItemTitleComponent implements OnInit {
   }
 
   async delItem() {
+    if (this.item.parentId > 0) {
+      return Swal.fire('很抱歉', '借鉴来的学习任务不允许删除');
+    }
     const will = await Swal.fire({
       text: '确定要删除这个任务吗？',
       cancelButtonText: '取消',
@@ -86,6 +91,13 @@ export class ScheduleItemTitleComponent implements OnInit {
     }
   }
 
+  openEdit(modelId: string) {
+    if (this.item.parentId > 0) {
+      return Swal.fire('很抱歉', '借鉴来的学习任务不允许编辑');
+    }
+    this.modalSvc.open(modelId);
+  }
+
   async panStart(ele: any, event: any) {
     if (!this.disabled) {
       this.panSvc.panstart(ele, event)
@@ -103,4 +115,9 @@ export class ScheduleItemTitleComponent implements OnInit {
       this.panSvc.panend(ele);
     }
   }
+
+  openSummaryPannel() {
+    this.summary_open = !this.summary_open;
+  }
+
 }

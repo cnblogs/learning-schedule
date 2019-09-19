@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { DataService } from '../infrastructure/data.service';
 import { BooleanResult } from '../infrastructure/booleanResult';
 import * as Enumerable from 'linq';
-import { map, catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
-import { Feedback, Schedule, ScheduleDetail, ScheduleItem, ScheduleItemDetail } from './schedule';
+import { Schedule, ScheduleDetail, ScheduleItem, ScheduleItemDetail, Summary, SummaryNote, SummaryLink, Following } from './schedule';
+import { KeyValue } from '@angular/common';
 
 
 @Injectable({
@@ -86,9 +85,9 @@ export class SchedulesService {
       .then(x => x.ok);
   }
 
-  listWithItems(alias: string = "", completed = false, teachOnly = false, page: number = 1, size = 30) {
+  listWithItems(alias: string = "", completed = false, page: number = 1, size = 30) {
     return this.svc.get<{ totalCount: number, items: ScheduleDetail[] }>(
-      `api/schedules/withItems/?completed=${completed}&page=${page}&size=${size}&alias=${alias}&teachOnly=${teachOnly}`)
+      `api/schedules/withItems/?completed=${completed}&page=${page}&size=${size}&alias=${alias}`)
       .toPromise();
   }
 
@@ -98,8 +97,7 @@ export class SchedulesService {
   }
 
   getSchedule(alias: string, scheduleId: number) {
-    return this.svc.get<ScheduleDetail>(`api/schedule/${scheduleId}/detail?alias=${alias}`)
-      .toPromise();
+    return this.svc.get<ScheduleDetail>(`api/schedule/${scheduleId}/detail?alias=${alias}`);
   }
 
   getLastUpdatePrivate(scheduleId: number) {
@@ -114,63 +112,43 @@ export class SchedulesService {
     return this.svc.get<ScheduleItemDetail>(`api/schedule/item/${itemId}/detail`);
   }
 
-  addSubtask(content: string, itemId: number) {
-    return this.svc.post<number>(`api/schedule/item/${itemId}/subtasks`, { content: content }).pipe(
-      map(x => x.body)
-    );
+  addSummaryNote(itemId: number, note: SummaryNote) {
+    return this.svc.post<number>(`api/schedule/item/${itemId}/summary/note`, note);
   }
 
-  addRef(url: string, itemId: number) {
-    return this.svc.post<number>(`api/schedule/item/${itemId}/references`, { url: url }).pipe(
-      map(x => x.body)
-    );
+  getSummary(itemId: number) {
+    return this.svc.get<Summary>(`api/schedule/item/${itemId}/summary`);
   }
 
-  addComment(content: string, itemId: number) {
-    return this.svc.post<number>(`api/schedule/item/${itemId}/comments`, { content: content }).pipe(
-      map(x => x.body)
-    );
+  updateSummaryNote(itemId: number, note: SummaryNote) {
+    return this.svc.put(`api/schedule/item/${itemId}/summary/note`, note);
   }
 
-  accomplishSubtask(itemId: number, taskId: number, completed = true) {
-    return this.svc.put(`api/schedule/item/${itemId}/subtasks/${taskId}?completed=${completed}`, null).pipe(
-      map(x => x.ok),
-      catchError(() => of(false))
-    );
+  deleteSummaryNote(itemId: number, noteId: number) {
+    return this.svc.delete(`api/schedule/item/${itemId}/summary/note/${noteId}`);
   }
 
-  updateSubtask(itemId: number, taskId: number, content: string) {
-    return this.svc.put(`api/schedule/item/${itemId}/subtasks/${taskId}/content`, { content: content }).pipe(
-      map(x => x.ok),
-      catchError(() => of(false))
-    );
+  getRecentPostLinks(page: number, size: number) {
+    return this.svc.get<SummaryLink[]>(`api/schedule/summary/post/links/recent/?page=${page}&size=${size}`);
   }
 
-  deleteSubtask(subtaskId: number) {
-    return this.svc.delete(`api/schedule/item/subtasks/${subtaskId}`).pipe(
-      map(x => x.ok),
-      catchError(() => of(false))
-    );
+  addSummaryLink(itemId: number, post: SummaryLink) {
+    return this.svc.post<number>(`api/schedule/item/${itemId}/summary/links`, post);
   }
 
-  deleteReference(refId: number) {
-    return this.svc.delete(`api/schedule/item/references/${refId}`).pipe(
-      map(x => x.ok),
-      catchError(() => of(false))
-    );
+  removeSummaryLink(itemId: number, linkId: number) {
+    return this.svc.delete(`api/schedule/item/${itemId}/summary/links/${linkId}`);
   }
 
-  updateReference(itemId: number, refId: number, url: string) {
-    return this.svc.put(`api/schedule/item/${itemId}/references/${refId}/url`, { url: url }).pipe(
-      map(x => x.ok),
-      catchError(() => of(false))
-    )
+  subscribe(id: number) {
+    return this.svc.post<number>(`api/schedule/${id}/subscription`, null);
   }
 
-  putFeedback(feedback: Feedback) {
-    return this.svc.put(`api/schedule/item/feedback/`, feedback).pipe(
-      map(x => x.body as number),
-      catchError(() => of(0))
-    )
+  getFollowings(id: number) {
+    return this.svc.get<Following[]>(`api/schedule/${id}/following`);
+  }
+
+  fetchScheduleOptions(page: number, size: number) {
+    return this.svc.get<KeyValue<number, string>[]>(`api/schedule/options?page=${page}&size=${size}`);
   }
 }

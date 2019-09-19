@@ -5,10 +5,11 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-paging',
   templateUrl: './paging.component.html',
-  styleUrls: ['./paging.component.css']
+  styleUrls: ['./paging.component.scss']
 })
 export class PagingComponent implements OnInit {
   @Input() config: PaginationInstance;
+  @Input() myclass = 'default';
   @Output() change = new EventEmitter();
   fragment: string;
   constructor(private route: ActivatedRoute) {

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, ElementRef } from '@angular/core';
-import {  SchedulesService } from '../schedules.service';
+import { SchedulesService } from '../schedules.service';
 import { ToastrService } from 'ngx-toastr';
 import { Schedule } from '../schedule';
 
@@ -78,4 +78,8 @@ export class ScheduleHeaderEditorComponent implements OnInit, AfterViewInit {
     this.cancel.emit();
   }
 
+  esc(e: any) {
+    if (!e.isComposing)
+      this.close();
+  }
 }

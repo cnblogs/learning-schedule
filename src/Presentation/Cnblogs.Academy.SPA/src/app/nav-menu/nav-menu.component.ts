@@ -19,7 +19,7 @@ export class NavMenuComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private httpClient: HttpClient,
-    private globalSvc: GlobalStatusService) {
+    public globalSvc: GlobalStatusService) {
     this.globalSvc.clickRoot$.subscribe(x => {
       this.closeNav();
       this.closeAuthDropdown();
@@ -63,10 +63,6 @@ export class NavMenuComponent implements OnInit {
   closeAuthDropdown() {
     this.authOpen = false;
     this.navOpen = false;
-  }
-
-  nobuble(event: Event) {
-    event.stopPropagation();
   }
 }
 

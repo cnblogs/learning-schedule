@@ -1,0 +1,8 @@
+<div>
+  <app-markdown-editor [rawContent]="note.note" (rawContentChange)="onChange($event)" (keyEnter)="save()"
+                       (keyEsc)="cancel()"></app-markdown-editor>
+  <div class="mt-2">
+    <button class="btn btn-primary btn-tiny mr-2" (click)="save()">保存</button>
+    <button class="btn btn-secondary btn-tiny" (click)="cancel()">取消</button>
+  </div>
+</div>

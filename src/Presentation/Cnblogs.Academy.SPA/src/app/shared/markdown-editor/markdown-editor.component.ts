@@ -37,11 +37,11 @@ export class MarkdownEditorComponent implements OnInit, OnDestroy {
   }
 
   onKey(event: KeyboardEvent) {
-    if (event.keyCode === 13) {
+    if (event.code === 'Enter') {
       if (event.ctrlKey || event.metaKey) {
         this.keyEnter.emit();
       }
-    } else if (event.keyCode === 27) {
+    } else if (event.code === 'Escape') {
       this.keyEsc.emit();
     }
   }

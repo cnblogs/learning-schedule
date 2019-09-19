@@ -3,23 +3,68 @@
   <a [routerLink]="['/']">返回首页</a>
 </div>
 <div class="" *ngIf="schedule">
-  <ngx-loading [show]="schedule.id < 0"></ngx-loading>
-  <div *ngIf="schedule.id > 0">
-    <div class="d-flex mb-3">
-      <div class="mr-2">
-        <a [routerLink]="['/u',schedule.user.alias]"><img class="portrait" src="{{schedule.user.icon}}"></a>
+
+  <ngx-loading [show]="loading"></ngx-loading>
+
+  <div *ngIf="schedule.id>0 && !deleted_open">
+    <div class="d-flex flex-column card bg-white px-3 pt-2 pb-2">
+      <div class="mr-2 pb-1 ml-1">
+
+        <span>
+          <small *ngIf="!!!schedule.parentId" class="gray-999">
+            创建于
+            <time>{{schedule.dateAdded | amDateFormat:"YYYY年MM月DD日 HH:mm"}}</time>
+          </small>
+
+          <small *ngIf="schedule.parentId" class="gray-999">
+            <time>{{schedule.dateAdded | amDateFormat:"YYYY年MM月DD日 HH:mm"}}</time>
+            借鉴于
+            <a [routerLink]="['/schedules/u', schedule.parent.alias,schedule.parentId]">
+              <span [innerHTML]="schedule.parent.userName"></span>/{{schedule.parent.title}}</a>
+          </small>
+        </span>
       </div>
-      <div class="d-flex flex-column gray-666">
-        <a [routerLink]="['/u',schedule.user.alias]" class="gray-666"><span [innerHTML]="schedule.user.userName"></span></a>
-        <time class="small gray-999">{{schedule.dateAdded | amDateFormat:"YYYY年MM月DD日 HH:mm"}} 创建</time>
+
+      <div class="gray-666 mt-3 d-flex flex-sm-row flex-column flex-wrap">
+        <div class="ml-1 d-flex flex-wrap flex-sm-nowrap">
+          <h1 class="mb-0 mr-2 d-flex flex-wrap flex-sm-nowrap">
+            <a [routerLink]="['/u',schedule.user.alias]" class="gray-666 d-flex flex-nowrap mr-2">
+              <img class="portrait mr-2" src="{{schedule.user.icon}}">
+              <span [innerHTML]="schedule.user.userName" class="word-keep"></span>
+            </a>
+            <span>/ {{schedule.title}}</span>
+          </h1>
+          <b *ngIf="schedule.parentId<1" class="btn btn-h1 btn-link pointer iconfont icon-fuzhi word-keep"
+             (click)="subscribe()">借鉴</b>
+        </div>
+        <div class="ml-auto flex-shrink-0 d-flex flex-nowrap dropdown mt-sm-0 mt-2" *ngIf="schedule.parentId<1"
+             [class.open]="following_open">
+          <ul class="mb-0 mr-2 d-flex" *ngIf="followingIcons">
+            <li *ngFor="let icon of followingIcons">
+              <img [src]="icon" class="icon">
+            </li>
+          </ul>
+          <small class="align-self-center" (click)="following_open=!following_open" (click)="globalSvc.nobuble($event)">
+            <a [routerLink]="['./']">{{schedule.followingCount}}个同学在借鉴</a>
+          </small>
+
+          <div *ngIf="following_open && followings.length>0" class="dropdown-menu dropdown-menu-right scrollable">
+            <a *ngFor="let following of followings" class="dropdown-item"
+               [routerLink]="['/schedules/u/',following.user.alias,following.scheduleId]">
+              <img [src]="following.user.icon" class="icon mr-1">
+              <small [innerHTML]="following.user.userName"></small>
+            </a>
+          </div>
+
+        </div>
       </div>
     </div>
-    <app-schedule [schedule]="schedule" (delete)="deleted=true" *ngIf="!deleted"></app-schedule>
-    <div *ngIf="deleted">
-      已删除「{{schedule.title}}」,返回
-      <a [routerLink]="['/']">学院首页</a>
-      /
-      <a [routerLink]="['/u', schedule.user.alias]">个人主页</a>
-    </div>
+    <app-schedule [schedule]="schedule" (delete)="deleted_open=true" *ngIf="!deleted_open"></app-schedule>
+  </div>
+  <div *ngIf="deleted_open">
+    已删除「{{schedule.title}}」,返回
+    <a [routerLink]="['/']">学院首页</a>
+    /
+    <a [routerLink]="['/u', schedule.user.alias]">个人主页</a>
   </div>
 </div>

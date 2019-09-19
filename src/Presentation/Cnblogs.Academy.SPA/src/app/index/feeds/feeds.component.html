@@ -6,9 +6,7 @@
       <li class="nav-item" [class.active]="myself"><a [routerLink]="['./']" fragment="myself">个人</a></li>
     </ul>
   </div>
-  <div *ngIf="!!!feeds">
-    <ngx-loading [show]="true"></ngx-loading>
-  </div>
+  <ngx-loading [show]="loading"></ngx-loading>
   <div *ngIf="feeds">
     <div *ngIf="feeds.length<1">
       <small>没有动态</small>

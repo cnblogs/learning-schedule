@@ -1,0 +1,72 @@
+@import "../../../theme.scss";
+
+.portrait {
+  border-radius: 100%;
+  height: 1.5rem;
+  border: 1px solid #ffffff;
+}
+
+.bb-1 {
+  border-bottom: 1px solid #f5f0f0;
+}
+
+.mw-8 {
+  min-width: 10rem;
+}
+
+.mw {
+  min-width: 7rem;
+}
+
+.card {
+  margin-bottom: -.5rem;
+}
+
+h1 {
+  font-size: 1.25rem;
+}
+
+.btn-h1 {
+  border-radius: 2px;
+  border: 1px solid $primary;
+  padding: 0 0.25rem;
+  height: 1.75rem;
+  text-align: center;
+}
+
+.btn-h1:hover {
+  text-decoration: none;
+}
+
+ul {
+  padding-left: 0.5rem;
+  max-width: 10rem;
+  overflow: hidden;
+}
+
+ul li {
+  list-style-type: none;
+  margin-left: -0.5rem;
+}
+
+.icon {
+  width: 1.25rem;
+  border-radius: 100%;
+  border: 1px solid #ffffff;
+}
+
+.drop-down {
+  position: absolute;
+  top: 2rem;
+  right: 1rem;
+  z-index: 1;
+}
+
+.word-keep {
+  word-break: keep-all;
+}
+
+.scrollable {
+  max-height: 10rem;
+  overflow-y: auto;
+}
