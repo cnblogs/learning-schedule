@@ -1,7 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using Cnblogs.Academy.DTO;
-using Cnblogs.Academy.ServiceAgent.UCenterService;
+using Cnblogs.UCenter.DTO.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

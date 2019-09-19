@@ -1,11 +1,13 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Cnblogs.Academy.Application.FeedsAppService;
-using Cnblogs.Academy.DTO;
-using Cnblogs.Academy.ServiceAgent.RelationService;
-using Cnblogs.Academy.ServiceAgent.UCenterService;
-using Cnblogs.Domain.Abstract;
+using Cnblogs.Common;
+using Cnblogs.Feed.DTO;
+using Cnblogs.UCenter.ServiceAgent;
+using Cnblogs.URelation.DTO;
+using Cnblogs.URelation.ServiceAgent;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,7 +36,7 @@ namespace Cnblogs.Academy.WebAPI.Controllers
 
         [AllowAnonymous]
         [HttpGet("{alias}")]
-        public async Task<ActionResult<PagedResults<FeedDto>>> GetFeeds(string alias, int page = 1, int size = 10, bool guest = false, bool myself = false)
+        public async Task<ActionResult<PagedResult<FeedDto>>> GetFeeds(string alias, int page = 1, int size = 10, bool guest = false, bool myself = false)
         {
             if (guest)
             {
@@ -55,7 +57,7 @@ namespace Cnblogs.Academy.WebAPI.Controllers
                     }
                     return await _feedsAppSvc.GetConcernFeeds(page, size, UCenterUser.UserId);
                 }
-                return PagedResults<FeedDto>.Empty();
+                return PagedResult<FeedDto>.Empty();
             }
         }
 
