@@ -10,7 +10,7 @@ using Cnblogs.Academy.DTO;
 using Cnblogs.Academy.Events;
 using Cnblogs.Academy.ServiceAgent.MarkdownApi;
 using Cnblogs.Domain.Abstract;
-using Cnblogs.UCenter.ServiceAgent;
+using Cnblogs.Academy.ServiceAgent.UCenterService;
 using DotNetCore.CAP;
 using Enyim.Caching;
 using Mapster;

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Cnblogs.Academy.Application.CategoryAppService.Dto;
 using Cnblogs.Academy.Application.CategoryAppService.InputModel;
-using Cnblogs.Academy.Dto;
 
 namespace Cnblogs.Academy.Application.CategoryAppService
 {
