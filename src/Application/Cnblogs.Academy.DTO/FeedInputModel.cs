@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using Cnblogs.Academy.Domain;
 
 namespace Cnblogs.Academy.DTO
 {

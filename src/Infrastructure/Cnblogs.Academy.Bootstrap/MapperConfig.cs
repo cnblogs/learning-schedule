@@ -1,14 +1,6 @@
-using System.Linq;
-using Cnblogs.Academy.Application.CourseMallAppService.Dto;
-using Cnblogs.Academy.Application.ProviderAppService;
 using Cnblogs.Academy.Application.ScheduleAppService.Dto;
-using Cnblogs.Academy.Domain.Books;
-using Cnblogs.Academy.Domain.CourseMall;
 using Cnblogs.Academy.Domain.Schedules;
-using Cnblogs.Academy.Dto;
 using Cnblogs.Academy.DTO;
-using Cnblogs.Academy.DTO.Books;
-using Cnblogs.UCenter.DTO.Users;
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
 

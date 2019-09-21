@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Cnblogs.Academy.Common;
 using Cnblogs.Academy.Domain.Schedules;
 using MediatR;
 

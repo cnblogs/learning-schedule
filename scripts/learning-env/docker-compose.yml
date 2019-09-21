@@ -7,7 +7,7 @@ services:
     command: ["/opt/mssql/bin/sqlservr"]
     environment:
       - ACCEPT_EULA=Y
-      - MSSQL_SA_PASSWORD=p@55w0rd
+      - MSSQL_SA_PASSWORD=Coding-Changes-World
     ports:
       - "1433:1433"
     networks:
@@ -27,8 +27,8 @@ services:
   rabbit:
     image: rabbitmq:3-management
     environment:
-      - RABBITMQ_DEFAULT_USER=rabbitAdmin
-      - RABBITMQ_DEFAULT_PASS=ABCDefg
+      - RABBITMQ_DEFAULT_USER=cnblogs
+      - RABBITMQ_DEFAULT_PASS=Coding-Changes-World
     networks:
       - learning-net
     ports:

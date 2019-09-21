@@ -1,5 +1,5 @@
 using Cnblogs.Academy.Application.ScheduleAppService;
-using Cnblogs.UCenter.DTO.Users;
+using Cnblogs.Academy.DTO;
 using MediatR;
 
 namespace Cnblogs.Academy.Commands.ItemCommands

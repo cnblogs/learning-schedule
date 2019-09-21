@@ -1,4 +1,5 @@
 using System;
+using Cnblogs.Academy.Common;
 using MediatR;
 
 namespace Cnblogs.Academy.Application.Commands

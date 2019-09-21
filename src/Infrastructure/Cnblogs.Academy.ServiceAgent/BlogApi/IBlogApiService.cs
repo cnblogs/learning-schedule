@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cnblogs.Academy.DTO;
-using Cnblogs.Common;
 
 namespace Cnblogs.Academy.ServiceAgent.BlogApi
 {

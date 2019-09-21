@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Bogus;
 using Cnblogs.Academy.DTO;
-using Cnblogs.Common;
 
 namespace Cnblogs.Academy.ServiceAgent.BlogApi
 {

@@ -1,5 +1,5 @@
 using System;
-using Cnblogs.UCenter.DTO.Users;
+using Cnblogs.Academy.Common;
 using MediatR;
 
 namespace Cnblogs.Academy.Application.Commands

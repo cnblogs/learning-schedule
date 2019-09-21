@@ -4,13 +4,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using StackExchange.Redis;
-using Cnblogs.CAP.RedisUtility;
-using Cnblogs.Web;
 using Microsoft.AspNetCore.Mvc;
 using BeatPulse;
 using Cnblogs.Academy.Bootstrap;
 using Cnblogs.URelation.ServiceAgent;
 using Cnblogs.Feed.ServiceAgent;
+using Cnblogs.Academy.Common;
 
 namespace Cnblogs.Academy.WebAPI
 {
@@ -84,7 +83,6 @@ namespace Cnblogs.Academy.WebAPI
         {
             redisConn = RedisManager.Connect(configuration.GetSection("redis"), out redisConnectionString);
             services.AddSingleton(redisConn);
-            services.AddSingleton<RedisUtility>();
             return services;
         }
     }

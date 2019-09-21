@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Cnblogs.Academy.Cache;
 using Cnblogs.Academy.Domain.Schedules;
 using Cnblogs.Academy.DTO;
-using Cnblogs.UCenter.ServiceAgent;
+using Cnblogs.Academy.ServiceAgent.UCenterService;
 using Enyim.Caching;
 using Mapster;
 using Microsoft.EntityFrameworkCore;

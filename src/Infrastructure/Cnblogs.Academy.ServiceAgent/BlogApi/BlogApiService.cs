@@ -1,11 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Cnblogs.Academy.DTO;
-using Cnblogs.Common;
-using Cnblogs.Domain.Abstract;
-using Mapster;
 
 namespace Cnblogs.Academy.ServiceAgent.BlogApi
 {

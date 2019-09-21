@@ -1,6 +1,7 @@
 using System;
 using Cnblogs.Academy.Application.ScheduleAppService;
-using Cnblogs.UCenter.DTO.Users;
+using Cnblogs.Academy.Common;
+using Cnblogs.Academy.DTO;
 using MediatR;
 
 namespace Cnblogs.Academy.Commands.ScheduleCommands

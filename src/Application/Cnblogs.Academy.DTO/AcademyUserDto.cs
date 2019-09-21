@@ -1,5 +1,4 @@
 using System;
-using Cnblogs.UCenter.DTO.Users;
 using Newtonsoft.Json;
 
 namespace Cnblogs.Academy.DTO

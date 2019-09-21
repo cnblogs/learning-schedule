@@ -11,6 +11,8 @@
     <PackageReference Include="NPinyinCore" Version="0.2.0" />
     <PackageReference Include="refit" Version="4.7.51" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.5.0" />
+    <PackageReference Include="EnyimMemcachedCore" Version="2.4.0" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Application\Cnblogs.Academy.DTO\Cnblogs.Academy.DTO.csproj" />

@@ -35,5 +35,6 @@
     <ProjectReference Include="..\..\Application\Cnblogs.Academy.Subscriber\Cnblogs.Academy.Subscriber.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Cnblogs.Academy.Bootstrap\Cnblogs.Academy.Bootstrap.csproj" />
     <ProjectReference Include="..\..\Application\Cnblogs.Academy.Commands\Cnblogs.Academy.Commands.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Cnblogs.Academy.Common\Cnblogs.Academy.Common.csproj" />
   </ItemGroup>
 </Project>
