@@ -5,8 +5,9 @@ using Cnblogs.Academy.Domain;
 using Cnblogs.Academy.Domain.Events;
 using Cnblogs.Academy.Domain.Schedules;
 using Cnblogs.Academy.Domain.Schedules.Events;
-using Cnblogs.Feed.ServiceAgent;
-using Cnblogs.UCenter.ServiceAgent;
+using Cnblogs.Academy.DTO;
+using Cnblogs.Academy.ServiceAgent.FeedService;
+using Cnblogs.Academy.ServiceAgent.UCenterService;
 using DotNetCore.CAP;
 using Enyim.Caching;
 using Microsoft.EntityFrameworkCore;
@@ -47,7 +48,7 @@ namespace Cnblogs.Academy.Application.FeedsAppService
             var subscriber = await _uCenter.GetUser(x => x.UserId, item.UserId);
             if (subscriber == null) return;
 
-            await _feedSvc.PublishAsync(new Feed.DTO.FeedInputModel
+            await _feedSvc.PublishAsync(new FeedInputModel
             {
                 ContentId = item.Id.ToString(),
                 FeedTitle = item.GenerateDescription(),
@@ -55,7 +56,7 @@ namespace Cnblogs.Academy.Application.FeedsAppService
                 Link = $"{AppConst.DomainAddress}/schedules/u/{subscriber.Alias}/{item.ScheduleId}/detail/{item.Id}",
                 UserId = item.UserId,
                 AppId = AppConst.AppGuid,
-                FeedType = Feed.ValueObjects.FeedType.ScheduleItemDone,
+                FeedType = FeedType.ScheduleItemDone,
                 IsPrivate = item.Schedule.IsPrivate
             });
             await _cache.RemoveAsync(CacheKeyStore.HomeFeeds());

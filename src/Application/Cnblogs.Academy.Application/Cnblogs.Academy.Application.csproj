@@ -13,7 +13,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
     <PackageReference Include="NUglify" Version="1.5.13" />
     <PackageReference Include="System.Data.SqlClient" Version="4.6.1" />
-    <!-- <PackageReference Include="Cnblogs.Feed.ServiceAgent" Version="1.0.1" /> -->
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
