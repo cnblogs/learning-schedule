@@ -7,7 +7,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Cnblogs.Feed.ServiceAgent" Version="1.0.1" />
   </ItemGroup>
 
   <PropertyGroup>
