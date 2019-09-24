@@ -6,7 +6,7 @@ using Cnblogs.Academy.Domain.Events;
 using Cnblogs.Academy.Domain.Schedules;
 using Cnblogs.Academy.Domain.Schedules.Events;
 using Cnblogs.Academy.ServiceAgent.MsgApi;
-using Cnblogs.UCenter.ServiceAgent;
+using Cnblogs.Academy.ServiceAgent.UCenterService;
 using DotNetCore.CAP;
 using Microsoft.EntityFrameworkCore;
 

@@ -18,6 +18,10 @@ namespace Cnblogs.Academy.ServiceAgent.UCenterService
         Task<bool> CheckUserIsManager(string loginName);
 
         Task<UserDto> GetUser<T>(Expression<Func<UserQuery, T>> queryBy, T value);
+        Task<TResult> GetUser<TSource, TResult>(
+            Expression<Func<UserQuery, TSource>> queryBy,
+            TSource queryValue,
+            Func<UserDto, TResult> selector);
         Task<UserDto[]> GetUsersByUserIds(Guid[] userIds);
     }
 }

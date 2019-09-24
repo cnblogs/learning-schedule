@@ -79,7 +79,7 @@ namespace Cnblogs.Academy.Application.FeedsAppService
             var alias = await _uCenter.GetUser(x => x.UserId, item.UserId, x => x.Alias);
             if (string.IsNullOrEmpty(alias)) return;
 
-            await _feedSvc.PublishAsync(new Feed.DTO.FeedInputModel
+            await _feedSvc.PublishAsync(new FeedInputModel
             {
                 ContentId = item.Id.ToString(),
                 FeedTitle = item.GenerateDescription(),
@@ -87,7 +87,7 @@ namespace Cnblogs.Academy.Application.FeedsAppService
                 UserId = item.UserId,
                 IsPrivate = item.Schedule.IsPrivate,
                 AppId = AppConst.AppGuid,
-                FeedType = Feed.ValueObjects.FeedType.ScheduleItemNew,
+                FeedType = FeedType.ScheduleItemNew,
             });
             await _cache.RemoveAsync(CacheKeyStore.HomeFeeds());
         }
@@ -102,18 +102,18 @@ namespace Cnblogs.Academy.Application.FeedsAppService
 
             if (item == null) return;
 
-            var model = new Feed.DTO.FeedDeletedInput
+            var model = new FeedDeletedInput
             {
                 ContentId = item.Id.ToString(),
                 AppId = AppConst.AppGuid,
                 UserId = item.Schedule.UserId,
-                FeedType = Feed.ValueObjects.FeedType.ScheduleItemNew
+                FeedType = FeedType.ScheduleItemNew
             };
             await _feedSvc.DeleteAsync(model);
 
             if (item.Completed)
             {
-                model.FeedType = Feed.ValueObjects.FeedType.ScheduleItemDone;
+                model.FeedType = FeedType.ScheduleItemDone;
                 await _feedSvc.DeleteAsync(model);
             }
 
@@ -126,10 +126,10 @@ namespace Cnblogs.Academy.Application.FeedsAppService
         [CapSubscribe(EventConst.ScheduleItemUndoEvent, Group = FeedAppConst.MessageGroup)]
         public async Task HandleScheduleItemUndoEvent(ScheduleItemUndoEvent e)
         {
-            await _feedSvc.DeleteAsync(new Feed.DTO.FeedDeletedInput
+            await _feedSvc.DeleteAsync(new FeedDeletedInput
             {
                 AppId = AppConst.AppGuid,
-                FeedType = Feed.ValueObjects.FeedType.ScheduleItemDone,
+                FeedType = FeedType.ScheduleItemDone,
                 ContentId = e.ItemId.ToString(),
                 UserId = e.UserId
             });
@@ -143,17 +143,17 @@ namespace Cnblogs.Academy.Application.FeedsAppService
             if (item == null) return;
 
             // Update feeds
-            var model = new Feed.DTO.FeedUpdateModel
+            var model = new FeedUpdateModel
             {
                 ContentId = item.Id.ToString(),
                 FeedTitle = item.GenerateDescription(),
-                FeedType = Feed.ValueObjects.FeedType.ScheduleItemNew
+                FeedType = FeedType.ScheduleItemNew
             };
             await _feedSvc.UpdateAsync(model);
 
             if (item.Completed)
             {
-                model.FeedType = Feed.ValueObjects.FeedType.ScheduleItemDone;
+                model.FeedType = FeedType.ScheduleItemDone;
                 await _feedSvc.UpdateAsync(model);
             }
 

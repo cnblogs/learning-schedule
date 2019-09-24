@@ -5,9 +5,10 @@ using Cnblogs.Academy.Domain;
 using Cnblogs.Academy.Domain.Events;
 using Cnblogs.Academy.Domain.Schedules;
 using Cnblogs.Academy.Domain.Schedules.Events;
+using Cnblogs.Academy.DTO;
+using Cnblogs.Academy.ServiceAgent.FeedService;
 using Cnblogs.Academy.ServiceAgent.MsgApi;
-using Cnblogs.Feed.ServiceAgent;
-using Cnblogs.UCenter.ServiceAgent;
+using Cnblogs.Academy.ServiceAgent.UCenterService;
 using DotNetCore.CAP;
 using Enyim.Caching;
 using Microsoft.EntityFrameworkCore;
@@ -48,10 +49,10 @@ namespace Cnblogs.Academy.Application.FeedsAppService
             var user = await _uCenter.GetUser(x => x.UserId, schedule.UserId);
             if (user == null) return;
 
-            await _feedSvc.PublishAsync(new Feed.DTO.FeedInputModel
+            await _feedSvc.PublishAsync(new FeedInputModel
             {
                 AppId = AppConst.AppGuid,
-                FeedType = Feed.ValueObjects.FeedType.ScheduleCompleted,
+                FeedType = FeedType.ScheduleCompleted,
                 ContentId = schedule.Id.ToString(),
                 UserId = schedule.UserId,
                 FeedTitle = schedule.Title,
@@ -75,7 +76,7 @@ namespace Cnblogs.Academy.Application.FeedsAppService
             var user = await _uCenter.GetUser(x => x.UserId, schedule.UserId);
             if (user == null) return;
 
-            await _feedSvc.PublishAsync(new Feed.DTO.FeedInputModel
+            await _feedSvc.PublishAsync(new FeedInputModel
             {
                 ContentId = schedule.Id.ToString(),
                 FeedTitle = schedule.Title,
@@ -84,7 +85,7 @@ namespace Cnblogs.Academy.Application.FeedsAppService
                 Link = $"{AppConst.DomainAddress}/schedules/u/{user.Alias}/{schedule.Id}",
                 IsPrivate = schedule.IsPrivate,
                 AppId = AppConst.AppGuid,
-                FeedType = Feed.ValueObjects.FeedType.ScheduleNew
+                FeedType = FeedType.ScheduleNew
             });
             await _cache.RemoveAsync(CacheKeyStore.HomeFeeds());
         }
@@ -96,10 +97,10 @@ namespace Cnblogs.Academy.Application.FeedsAppService
             var schedule = await _repository.FindByUUID<Schedule>(e.ScheduleUuid).FirstOrDefaultAsync();
             if (schedule == null) return;
 
-            await _feedSvc.DeleteAsync(new Feed.DTO.FeedDeletedInput
+            await _feedSvc.DeleteAsync(new FeedDeletedInput
             {
                 AppId = AppConst.AppGuid,
-                FeedType = Feed.ValueObjects.FeedType.ScheduleCompleted,
+                FeedType = FeedType.ScheduleCompleted,
                 UserId = schedule.UserId,
                 ContentId = schedule.Id.ToString()
             });
@@ -116,17 +117,17 @@ namespace Cnblogs.Academy.Application.FeedsAppService
             var schedule = await _repository.FindByUUID<Schedule>(e.ScheduleUuid).IgnoreQueryFilters().FirstOrDefaultAsync();
             if (schedule == null) return;
 
-            var model = new Feed.DTO.FeedDeletedInput
+            var model = new FeedDeletedInput
             {
                 ContentId = schedule.Id.ToString(),
-                FeedType = Feed.ValueObjects.FeedType.ScheduleNew,
+                FeedType = FeedType.ScheduleNew,
                 AppId = AppConst.AppGuid,
                 UserId = schedule.UserId
             };
             await _feedSvc.DeleteAsync(model);
             if (schedule.Stage == Domain.Schedules.Stage.Completed)
             {
-                model.FeedType = Feed.ValueObjects.FeedType.ScheduleCompleted;
+                model.FeedType = FeedType.ScheduleCompleted;
                 await _feedSvc.DeleteAsync(model);
             }
 
@@ -142,19 +143,19 @@ namespace Cnblogs.Academy.Application.FeedsAppService
             var schedule = await _repository.FindByUUID<Schedule>(e.ScheduleUuid).FirstOrDefaultAsync();
             if (schedule == null) return;
 
-            var model = new Feed.DTO.FeedUpdateModel
+            var model = new FeedUpdateModel
             {
                 ContentId = schedule.Id.ToString(),
                 FeedTitle = schedule.Title,
                 FeedContent = schedule.Description,
-                FeedType = Feed.ValueObjects.FeedType.ScheduleNew
+                FeedType = FeedType.ScheduleNew
             };
 
             await _feedSvc.UpdateAsync(model);
 
             if (schedule.Stage == Stage.Completed)
             {
-                model.FeedType = Feed.ValueObjects.FeedType.ScheduleCompleted;
+                model.FeedType = FeedType.ScheduleCompleted;
                 await _feedSvc.UpdateAsync(model);
             }
 

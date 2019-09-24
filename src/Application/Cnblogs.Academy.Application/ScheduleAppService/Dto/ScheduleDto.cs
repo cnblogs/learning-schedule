@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Cnblogs.Academy.Domain.Schedules;
 using Cnblogs.Academy.DTO;
-using Cnblogs.UCenter.DTO.Users;
 using Newtonsoft.Json;
 
 namespace Cnblogs.Academy.Application.ScheduleAppService
