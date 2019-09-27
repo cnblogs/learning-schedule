@@ -7,9 +7,10 @@ using StackExchange.Redis;
 using Microsoft.AspNetCore.Mvc;
 using BeatPulse;
 using Cnblogs.Academy.Bootstrap;
-using Cnblogs.URelation.ServiceAgent;
-using Cnblogs.Feed.ServiceAgent;
 using Cnblogs.Academy.Common;
+using Cnblogs.Academy.ServiceAgent.UCenterService;
+using Cnblogs.Academy.ServiceAgent.RelationService;
+using Cnblogs.Academy.ServiceAgent.FeedService;
 
 namespace Cnblogs.Academy.WebAPI
 {

@@ -8,13 +8,13 @@ using Cnblogs.Academy.Application.ScheduleAppService;
 using Cnblogs.Academy.Application.ScheduleAppService.Dto;
 using Cnblogs.Academy.Commands.ItemCommands;
 using Cnblogs.Academy.Commands.ScheduleCommands;
+using Cnblogs.Academy.Common;
 using Cnblogs.Academy.Domain.Schedules;
 using Cnblogs.Academy.DTO;
 using Cnblogs.Academy.DTO.InputModel;
 using Cnblogs.Academy.ServiceAgent.BlogApi;
+using Cnblogs.Academy.ServiceAgent.UCenterService;
 using Cnblogs.Domain.Abstract;
-using Cnblogs.UCenter.DTO.Users;
-using Cnblogs.UCenter.ServiceAgent;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -97,7 +97,7 @@ namespace Cnblogs.Academy.WebAPI.Controllers
 
         // [AllowAnonymous]
         [HttpGet("withItems")]
-        public async Task<PagedResults<ScheduleDetailDto>> ListWithItems(bool completed = false, string alias = "",
+        public async Task<PagedResult<ScheduleDetailDto>> ListWithItems(bool completed = false, string alias = "",
             int page = 1, int size = 30)
         {
             UserDto user;
@@ -109,7 +109,7 @@ namespace Cnblogs.Academy.WebAPI.Controllers
             {
                 user = await _uCenterService.GetUser(x => x.Alias, alias);
             }
-            if (user == null) return PagedResults<ScheduleDetailDto>.Empty();
+            if (user == null) return PagedResult<ScheduleDetailDto>.Empty();
 
             var hasPrivate = false;
             if (IsAuthenticated)

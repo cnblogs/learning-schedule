@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Cnblogs.Academy.Application.FeedsAppService;
-using Cnblogs.Common;
-using Cnblogs.Feed.DTO;
-using Cnblogs.UCenter.ServiceAgent;
-using Cnblogs.URelation.DTO;
-using Cnblogs.URelation.ServiceAgent;
+using Cnblogs.Academy.DTO;
+using Cnblogs.Academy.ServiceAgent.RelationService;
+using Cnblogs.Academy.ServiceAgent.UCenterService;
+using Cnblogs.Domain.Abstract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
