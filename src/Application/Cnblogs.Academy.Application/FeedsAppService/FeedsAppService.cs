@@ -30,16 +30,16 @@ namespace Cnblogs.Academy.Application.FeedsAppService
                 () => _feedsApi.GetFeedsByAppId(AppConst.AppId, page, size));
         }
 
-        public async Task<PagedResults<FeedDto>> GetConcernFeeds(int page, int size, Guid userId, Guid? groupId = null)
+        public async Task<PagedResult<FeedDto>> GetConcernFeeds(int page, int size, Guid userId, Guid? groupId = null)
         {
-            return await _cache.GetValueOrCreateAsync<PagedResults<FeedDto>>(CacheKeyStore.IndexFeeds(page, userId, groupId), 5 * 60,
+            return await _cache.GetValueOrCreateAsync<PagedResult<FeedDto>>(CacheKeyStore.IndexFeeds(page, userId, groupId), 5 * 60,
             () => _feedsApi.GetConcernFeeds(AppConst.AppId, page, size, userId, groupId));
         }
 
-        public async Task<PagedResults<FeedDto>> GetFeeds(string alias, int pageIndex, int pageSize, bool withPrivate = false)
+        public async Task<PagedResult<FeedDto>> GetFeeds(string alias, int pageIndex, int pageSize, bool withPrivate = false)
         {
             var user = await _uCenterSvc.GetUser(x => x.Alias, alias);
-            if (user == null) return PagedResults<FeedDto>.Empty();
+            if (user == null) return PagedResult<FeedDto>.Empty();
 
             return await _feedsApi.GetMyFeeds(AppConst.AppId, user.UserId, pageIndex, pageSize, withPrivate);
         }

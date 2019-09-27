@@ -14,7 +14,7 @@ namespace Cnblogs.Academy.Application.ScheduleAppService
         Task DeleteSchedulesByUserId(Guid userId);
         Task RestoreSchedulesByUserId(Guid userId);
         Task<(IEnumerable<MyScheduleDto> list, int count)> GetMySchedules(Guid userId, bool completed, int pageIndex, int pageSize);
-        Task<PagedResults<ScheduleDetailDto>> ListWithItemsAsync(Guid userId, bool hasPrivate, bool completed,
+        Task<PagedResult<ScheduleDetailDto>> ListWithItemsAsync(Guid userId, bool hasPrivate, bool completed,
             int page, int size);
         Task<ScheduleDetailDto> GetScheduleDetailAsync(long scheduleId, bool isOwner);
         Task<DateTimeOffset?> LastPrivateUpdateTime(long scheduleId);

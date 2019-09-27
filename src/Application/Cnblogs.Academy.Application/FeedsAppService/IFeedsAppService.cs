@@ -8,8 +8,8 @@ namespace Cnblogs.Academy.Application.FeedsAppService
 {
     public interface IFeedsAppService
     {
-        Task<PagedResults<FeedDto>> GetFeeds(string alias, int page, int size, bool withPrivate = false);
+        Task<PagedResult<FeedDto>> GetFeeds(string alias, int page, int size, bool withPrivate = false);
         Task<IEnumerable<FeedDto>> GetAcademyFeedsAsync(int page, int size);
-        Task<PagedResults<FeedDto>> GetConcernFeeds(int page, int size, Guid userId, Guid? groupId = null);
+        Task<PagedResult<FeedDto>> GetConcernFeeds(int page, int size, Guid userId, Guid? groupId = null);
     }
 }

@@ -140,7 +140,7 @@ namespace Cnblogs.Academy.Application.ScheduleAppService
             return (list, count);
         }
 
-        public async Task<PagedResults<ScheduleDetailDto>> ListWithItemsAsync(Guid userId, bool hasPrivate, bool completed,
+        public async Task<PagedResult<ScheduleDetailDto>> ListWithItemsAsync(Guid userId, bool hasPrivate, bool completed,
             int page, int size)
         {
             IQueryable<Schedule> query = _repository.Schedules.Where(x => x.UserId == userId);
@@ -166,7 +166,7 @@ namespace Cnblogs.Academy.Application.ScheduleAppService
                      return s;
                  }).ToList();
             }
-            return new PagedResults<ScheduleDetailDto>(count, list);
+            return new PagedResult<ScheduleDetailDto>(count, list);
         }
 
         public async Task<ScheduleDetailDto> GetScheduleDetailAsync(long scheduleId, bool isOwner)
