@@ -24,7 +24,6 @@ import { FeedItemModule } from './feed-item/feed-item.module';
 import { ReleaseComponent } from './about/release/release.component';
 import { ServerResponseService } from './services/server-response';
 import { AdminGuardService } from './admin-guard.service';
-import { ShortcutComponent } from './shortcut/shortcut.component';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -40,14 +39,13 @@ export class MyHammerConfig extends HammerGestureConfig {
 
 @NgModule({
   declarations: [
-    AppComponent, ShortcutComponent,
+    AppComponent,
     NavMenuComponent,
     AboutComponent,
     PageNotFoundComponent,
     AuthComponent,
     HomeComponent,
     ReleaseComponent,
-    ShortcutComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -75,22 +73,9 @@ export class MyHammerConfig extends HammerGestureConfig {
     },
     ServerResponseService
   ],
-  // bootstrap: [AppComponent],
-  entryComponents: [AppComponent, ShortcutComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule {
-  ngDoBootstrap(appRef: ApplicationRef) {
-    try {
-      if (location) {
-        if (location.pathname.startsWith('/shortcut')) {
-          return appRef.bootstrap(ShortcutComponent, "#app");
-        }
-      }
-    } catch (error) {
-      console.error(error);
-      return appRef.bootstrap(AppComponent, '#app');
-    }
-    return appRef.bootstrap(AppComponent, '#app');
-  }
+  
 }
 
