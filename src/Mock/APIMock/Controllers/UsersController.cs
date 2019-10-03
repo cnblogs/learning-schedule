@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Bogus;
@@ -28,6 +29,14 @@ namespace APIMock.Controllers
                     IsPersistent = isPersistent,
                     ExpiresUtc = DateTimeOffset.Now.Add(cookieAuthOptions.Value.ExpireTimeSpan)
                 });
+        }
+
+        [Route("api/v2/users/[[userIds]]/loginNames")]
+        public IActionResult GetLoginNames()
+        {
+            var faker = new Faker<UserDto>()
+            .RuleFor(x=>x.LoginName, f=>f.Name.FirstName());
+            return Ok(faker.Generate(2).Select(x => x.LoginName));
         }
 
         [Route("api/v2/user/{*url}")]

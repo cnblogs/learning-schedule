@@ -14,15 +14,6 @@
         <li class="nav-item d-flex" [routerLinkActive]='["active"]'>
           <a class="nav-link position-relative" [routerLink]="['/schedules']"><span class="">学习计划</span><i></i></a>
         </li>
-        <li class="nav-item d-flex" [routerLinkActive]='["active"]'>
-          <a class="nav-link position-relative" [routerLink]="['/books']"><span class="">图书馆</span><i></i></a>
-        </li>
-        <li class="nav-item d-flex" [routerLinkActive]='["active"]'>
-          <a class="nav-link position-relative" href="//edu.cnblogs.com"><span class="">班级</span><i></i></a>
-        </li>
-        <!-- <li class="nav-item d-flex" [routerLinkActive]="['active']">
-          <a class="nav-link position-relative" [routerLink]="['/course-mall']"><span class="">课程超市</span><i></i></a>
-        </li> -->
       </ul>
 
       <div *ngIf="!!!auth">验证中...</div>
