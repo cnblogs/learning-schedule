@@ -5,7 +5,7 @@ import { GlobalStatusService } from 'src/app/shared/global-status.service';
   providedIn: 'root'
 })
 export class PanMenuService {
-  slideThreshold = 150;
+  slideThreshold = 100;
   startDirection = 2; // 2: left; 4 right;
   elements: HTMLElement[];
   constructor(private globalSvc: GlobalStatusService) {

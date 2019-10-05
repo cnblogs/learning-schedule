@@ -1,0 +1,14 @@
+@import "../../../schedules.scss";
+.list-group-item {
+  padding: 0.2rem 0 0.2rem 0;
+}
+
+.min-w-4 {
+  min-width: 4rem;
+}
+
+.border-radius {
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  box-shadow: 3px 3px 3px #e6e4e4;
+}

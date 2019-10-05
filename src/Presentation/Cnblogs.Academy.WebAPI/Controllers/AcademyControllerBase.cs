@@ -1,9 +1,9 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using Cnblogs.Academy.DTO;
-using Cnblogs.Academy.ServiceAgent.UCenterService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Cnblogs.Academy.ServiceAgent.UCenterService;
+using Cnblogs.Academy.DTO;
 
 namespace Cnblogs.Academy.WebAPI.Controllers
 {

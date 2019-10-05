@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Cnblogs.Academy.Domain.Schedules;
 using Cnblogs.Academy.DTO;
 using Newtonsoft.Json;
@@ -12,6 +13,7 @@ namespace Cnblogs.Academy.Application.ScheduleAppService
         public DateTimeOffset? DateEnd { get; set; }
         public DateTimeOffset DateUpdated { get; set; }
         public Stage Stage { get; set; }
+        public int FollowingCount { get; set; }
 
         [JsonIgnore]
         public Guid UserId { get; set; }

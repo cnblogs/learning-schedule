@@ -8,15 +8,11 @@ namespace Cnblogs.Academy.Domain.Schedules
     {
         IQueryable<Schedule> Schedules { get; }
         IQueryable<ScheduleItem> ScheduleItems { get; }
-        IQueryable<ItemDoneRecord> Records { get; }
-        IQueryable<ScheduleFollowing> ScheduleFollowing { get; }
         IQueryable<SchedulePrivateUpdateRecord> PrivateUpdateRecord { get; }
-        IQueryable<Subtask> Subtasks { get; }
-        IQueryable<Reference> References { get; }
-        IQueryable<Feedback> Feedbacks { get; }
+        IQueryable<SummaryNote> SummaryNotes { get; }
 
         void AddSchedule(Schedule schedule);
         void AddScheduleItems(params ScheduleItem[] items);
-        IQueryable<Schedule> GetWithUserId(long id, Guid userId);
+        IQueryable<T> FindByUUID<T>(Guid uuid, bool tracking = false) where T : BaseEntity;
     }
 }

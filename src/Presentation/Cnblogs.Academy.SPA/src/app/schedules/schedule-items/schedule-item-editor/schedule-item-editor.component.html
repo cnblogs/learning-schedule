@@ -1,13 +1,14 @@
-<form #itemForm="ngForm" (ngSubmit)="itemForm.form.valid ? save() : null" (keydown.esc)="close()">
+<form #itemForm="ngForm" (ngSubmit)="itemForm.form.valid ? save() : null">
   <div class="d-flex flex-wrap">
     <div class="flex-grow-1 row">
       <div class="d-flex col-md-auto col-sm-12 flex-grow-1">
-        <div class="d-flex flex-column justify-content-center mr-2">
-          <input type="checkbox" class="circle-check ml-sm-2" disabled [checked]="item.completed">
+        <div class="mr-2 custom-control custom-checkbox align-self-center ml-sm-2">
+          <input type="checkbox" class="custom-control-input" disabled [checked]="item.completed">
+          <label class="custom-control-label custom-control-circle"></label>
         </div>
         <textarea name="title" [value]="item.title" [(ngModel)]="item.title" [ngModelOptions]="{updateOn: 'submit'}"
                   #input="ngModel" minlength="2" maxlength="5000" class="slim gray-666 py-2 ph" rows=1 autosize
-                  placeholder="添加学习任务" (keypress)="onEnter($event,sub)"></textarea>
+                  placeholder="添加学习任务" (keydown.enter)="onEnter($event,sub)" (keydown.esc)="esc($event)"></textarea>
       </div>
       <div *ngIf="input.invalid && (input.dirty || input.touched)" class="ml-4 col-md-auto col-sm-6 d-flex">
         <small class="text-danger align-self-center">

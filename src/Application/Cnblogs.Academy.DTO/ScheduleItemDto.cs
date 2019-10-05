@@ -32,5 +32,6 @@ namespace Cnblogs.Academy.DTO
         [JsonIgnore]
         public Guid UserId { get; set; }
         public AcademyUserDto User { get; set; }
+        public long? ParentId { get; set; }
     }
 }

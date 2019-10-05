@@ -1,0 +1,27 @@
+<div class="px-2 pt-2 border-top">
+  <div class="d-flex flex-wrap">
+    <div class="flex-grow-1 d-flex">
+      <div *ngIf="!note_edit" class="align-self-center">
+        <div *ngIf="note?.html" [innerHTML]="note?.html" class="small p-no-mb"></div>
+        <div *ngIf="!note?.html">
+          <small *ngIf="!readonly" (click)="note_edit=true" class="pointer">写点心得...</small>
+          <small *ngIf="readonly">没有心得:)</small>
+        </div>
+      </div>
+
+      <div *ngIf="note_edit" class="mt-2 flex-grow-1">
+        <ng-container *ngIf="!readonly">
+          <app-note-edit [itemId]="itemId" [note]="note" (saved)="save($event)" (closed)="close()"></app-note-edit>
+        </ng-container>
+      </div>
+    </div>
+
+    <div *ngIf="note && !readonly && !note_edit" class="ml-auto">
+      <button class="btn btn-sm btn-link iconfont icon-editor" (click)="note_edit=!note_edit" (click)="noPop($event)"
+              [disabled]="note.id<1">编辑</button>
+      <button class="btn btn-sm btn-link iconfont icon-empty" (click)="delete()" (click)="noPop($event)"
+              [disabled]="note.id<1">删除</button>
+    </div>
+
+  </div>
+</div>

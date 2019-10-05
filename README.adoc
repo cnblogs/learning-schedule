@@ -9,6 +9,7 @@
 * dotnet-sdk 2.x
 * nodejs LTS
 * bash
+* angualr-cli: `npm install -g @angular/cli`
 
 === 修改 HOST 文件
 

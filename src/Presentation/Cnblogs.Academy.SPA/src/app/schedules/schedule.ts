@@ -17,6 +17,8 @@ export class Schedule {
   dateAdded: Date;
   dateUpdated: Date;
   isPrivate = false;
+  parentId: number;
+  followingCount: number;
 }
 
 export class ScheduleItem {
@@ -28,6 +30,7 @@ export class ScheduleItem {
   dateAdded: Date;
   dateEnd: Date;
   user: AcademyUser;
+  parentId: number;
 }
 
 export enum TextType {
@@ -38,7 +41,16 @@ export enum TextType {
 
 export class ScheduleDetail extends Schedule {
   user: AcademyUser;
-  stage: Stage
+  stage: Stage;
+  parentId: number;
+  parent: ScheduleIntro;
+}
+
+export class ScheduleIntro {
+  id: number;
+  title: string;
+  userName: string;
+  alias: string;
 }
 
 export enum Stage {
@@ -48,36 +60,28 @@ export enum Stage {
 }
 
 export class ScheduleItemDetail extends ScheduleItem {
-  subtasks: Subtask[];
-  references: Reference[];
-  feedbacks: Feedback[];
 }
 
-export class Subtask {
-  id: number;
-  content: string;
-  dateAdded: Date;
-  dateEnd: Date;
-  previousId: number;
+export class Summary {
+  itemId: number;
+  note: SummaryNote;
+  links: SummaryLink[];
 }
 
-export class Reference {
+export class SummaryNote {
   id: number;
-  url: string;
-  dateAdded: Date;
+  note: string;
+  html: string;
 }
 
-export class CommentItem {
+export class SummaryLink {
   id: number;
-  content: string;
-  dateAdded: Date;
+  link: string;
+  title: string;
+  postId: number;
 }
 
-export class Feedback {
-  id: number;
-  difficulty: number;
-  content: string;
-
-  constructor(public itemId: number) {
-  }
+export class Following {
+  scheduleId: number;
+  user: AcademyUser;
 }

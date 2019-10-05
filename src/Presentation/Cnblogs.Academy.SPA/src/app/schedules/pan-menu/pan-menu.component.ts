@@ -6,8 +6,6 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
   styleUrls: ['./pan-menu.component.css']
 })
 export class PanMenuComponent implements OnInit {
-  @Input() completed = false;
-
   @Output() edit = new EventEmitter();
   @Output() delete = new EventEmitter();
   @Output() checked = new EventEmitter();

@@ -1,8 +1,0 @@
-<form #newref="ngForm" (submit)="submit(iref)">
-  <textarea placeholder="输入链接地址 https://" #iref rows=1 autosize (focus)="focus(iref)" (keypress)="enter($event,iref)"
-            (blur)="blur(iref)" (keyup.esc)="close()" appFocusOnShow class="no-outline" [value]="reference?.url"
-            class="border-0 no-outline w-100 gray-666 small"></textarea>
-  <div class="border-top" *ngIf="alert">
-    <small class="text-danger point" (click)="alert=''">{{alert}}</small>
-  </div>
-</form>

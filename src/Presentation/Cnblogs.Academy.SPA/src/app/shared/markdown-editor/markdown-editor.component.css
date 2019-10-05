@@ -18,34 +18,39 @@ ul {
   border-bottom: solid 1px #E6E2E2;
 }
 
-ul li a {
+ul li label {
   color: inherit;
   text-decoration: none;
-  padding: 0 10px 10px 10px;
+  padding: 0 10px 5px 10px;
   display: block;
   font-size: 14px;
+  font-weight: normal;
+  cursor: pointer;
 }
 
-ul li.active a {
-  color: #104B9B;
-  border-bottom: #104B9B solid 2px;
+ul li.active label {
+  border-bottom: 2px solid;
   font-weight: bold;
 }
 
 textarea {
-  border: none;
-  border-bottom: solid 1px #E6E2E2;
   border-radius: 0;
   outline: none;
   width: 100%;
-  height: auto;
-  overflow: hidden;
-  position: relative;
-  top:-1px;
+  min-height: 5rem;
+  overflow-y: auto;
+  border: none;
+  letter-spacing: 1px;
+  padding: 0;
 }
 
 .preview {
-  min-height: 10rem;
+  min-height: 5rem;
+  letter-spacing: 1px;
+}
+
+:host ::ng-deep p {
+  margin-bottom: 0;
 }
 
 input {

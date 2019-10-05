@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Cnblogs.Academy.Domain;
 using Cnblogs.Academy.Domain.Schedules;
 using Cnblogs.Domain.Abstract;
 using Microsoft.EntityFrameworkCore;
@@ -16,17 +17,9 @@ namespace Cnblogs.Academy.Repositories.Repositories
 
         public IQueryable<ScheduleItem> ScheduleItems => _context.ScheduleItems;
 
-        public IQueryable<ItemDoneRecord> Records => _context.Records;
-
-        public IQueryable<ScheduleFollowing> ScheduleFollowing => _context.Following;
-
         public IQueryable<SchedulePrivateUpdateRecord> PrivateUpdateRecord => _context.SchedulePrivateUpdateRecord;
 
-        public IQueryable<Subtask> Subtasks => _context.Subtasks;
-
-        public IQueryable<Reference> References => _context.References;
-
-        public IQueryable<Feedback> Feedbacks => _context.Feedbacks;
+        public IQueryable<SummaryNote> SummaryNotes => _context.SummaryNotes;
 
         public void AddSchedule(Schedule schedule)
         {
@@ -44,14 +37,14 @@ namespace Cnblogs.Academy.Repositories.Repositories
             }
         }
 
-        public IQueryable<Schedule> GetWithUserId(long id, Guid uId)
+        public IQueryable<T> FindByUUID<T>(Guid uuid, bool tracking = false) where T : BaseEntity
         {
-            var query = Schedules.Where(s => s.Id == id);
-            if (uId != default(Guid))
+            IQueryable<T> query = _context.Set<T>();
+            if (!tracking)
             {
-                query = query.Where(s => s.UserId == uId || s.Following.Any(f => f.UserId == uId));
+                query = query.AsNoTracking();
             }
-            return query;
+            return query.Where(x => x.UUID == uuid);
         }
     }
 }

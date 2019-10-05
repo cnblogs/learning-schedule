@@ -1,7 +1,19 @@
-<div (click)="onTap($event)" class="h-100">
+<div (click)="onTap($event)" class="full-screen">
   <ngx-loading-bar [includeSpinner]="false" [color]="'#FACD01'"></ngx-loading-bar>
+
   <app-nav-menu></app-nav-menu>
+
   <div class="container pt-4">
     <router-outlet></router-outlet>
   </div>
+
+  <footer>
+    <small>
+      &copy;2004-2019
+      <a href="//www.cnblogs.com">博客园</a>
+      · 学院
+      <a href="https://github.com/cnblogs/academy/releases" target="_blank">0.3.0</a>
+      <a href="https://github.com/cnblogs/academy/issues" target="_blank">问题反馈</a>
+    </small>
+  </footer>
 </div>

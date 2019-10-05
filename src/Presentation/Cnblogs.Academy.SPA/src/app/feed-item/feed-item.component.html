@@ -18,12 +18,15 @@
           <span *ngSwitchCase="23" class="mb-0">完成了目标：</span>
         </small>
       </p>
-      <img *ngIf="feed.isPrivate" class="ml-auto" src="/assets/private.svg">
+      <i *ngIf="feed.isPrivate" class="iconfont icon-yanjing2 text-primary ml-auto"></i>
     </div>
     <hr class="my-1 w-100">
     <div class="d-flex">
-      <div class="mr-2"><input type="checkbox" class="circle-check cursor-default" disabled
-               [checked]="isCompletedType(feed.feedType)"></div>
+      <div class="mr-2 custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input cursor-default" disabled
+               [checked]="isCompletedType(feed.feedType)">
+        <label class="custom-control-label custom-control-circle"></label>
+      </div>
       <a [routerLink]="subPath(feed.link)" class="gray-666">{{feed.feedTitle}}</a>
     </div>
   </div>

@@ -1,10 +1,6 @@
 @import "../schedule-index/schedule-index.component.css";
 @import "../schedule/schedule.component.css";
 
-.waistcoat {
-  padding: 0 1rem .5rem 1rem;
-}
-
 .light-row:hover {
   background-color: #F6FFF1;
 }
@@ -22,14 +18,13 @@
   width: 2rem;
   height: 2rem;
   cursor: pointer;
-  position: absolute;
-  bottom: -1.5rem;
   text-align: center;
   z-index: 100;
+  position: relative;
 }
 
 .sleeve.left {
-  left: 0;
+  left: -1rem;
 }
 
 .sleeve.left::before {
@@ -37,14 +32,14 @@
   display: inline-block;
   border-width: 1rem;
   border-style: solid;
-  border-color: #E1EFE2 #E1EFE2 #FFFFFF #FFFFFF ;
+  border-color: #E1EFE2 #E1EFE2 #FFFFFF #FFFFFF;
 }
 
 .sleeve.right {
-  right: 0;
+  right: -1rem;
 }
 
-.sleeve.right::after{
+.sleeve.right::after {
   content: "";
   display: inline-block;
   border-width: 1rem;
@@ -52,15 +47,15 @@
   border-color: #E1EFE2 #FFFFFF #FFFFFF #E1EFE2;
 }
 
+.sleeve.hide {
+  visibility: hidden;
+}
+
 .paging {
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  bottom: -1.5rem;
-  right: 0;
-  left: 0;
   height: 2rem;
 }
 
@@ -121,11 +116,12 @@
   border-width: .5rem .5rem .5rem 0;
 }
 
-@media (max-width:576px) {
+@media (max-width: 576px) {
   .arrow {
     display: block;
     top: 1rem;
   }
+
   .arrow::before {
     border-width: 0 .5rem .5rem .5rem;
     border-bottom-color: rgb(210, 236, 216);

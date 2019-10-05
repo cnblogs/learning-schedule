@@ -1,7 +1,7 @@
 <div class="gray-666">
   <p class="title-card">最近动态</p>
-  <div *ngIf="!!!feeds">
-    <ngx-loading [show]="true"></ngx-loading>
+  <div>
+    <ngx-loading [show]="loading"></ngx-loading>
   </div>
   <div *ngIf="feeds">
     <div *ngFor="let feed of feeds | paginate: config" class="mb-4">

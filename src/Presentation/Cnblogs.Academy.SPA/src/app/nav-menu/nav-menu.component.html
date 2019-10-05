@@ -3,8 +3,7 @@
     <a class="mr-3" href="/">
       <img src="/assets/logo.png" class="logo">
     </a>
-    <button class="navbar-toggler border-0" href="javascript:void(0)" (click)="navOpen=!navOpen"
-            (click)="nobuble($event)">
+    <button class="navbar-toggler border-0" (click)="navOpen=!navOpen" (click)="globalSvc.nobuble($event)">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse">
@@ -15,20 +14,13 @@
         <li class="nav-item d-flex" [routerLinkActive]='["active"]'>
           <a class="nav-link position-relative" [routerLink]="['/schedules']"><span class="">学习计划</span><i></i></a>
         </li>
-        <li class="nav-item d-flex" [routerLinkActive]='["active"]'>
-          <a class="nav-link position-relative" href="//edu.cnblogs.com"><span class="">班级</span><i></i></a>
-        </li>
-        <!-- <li class="nav-item d-flex" [routerLinkActive]="['active']">
-          <a class="nav-link position-relative" [routerLink]="['/course-mall']"><span class="">课程超市</span><i></i></a>
-        </li> -->
       </ul>
 
       <div *ngIf="!!!auth">验证中...</div>
 
       <div *ngIf="auth" class="my-2">
         <div *ngIf="auth.success" class="dropdown" [class.open]="authOpen">
-          <div href="javascript:void(0)" class="point carrot mr-4 flex-sm-right" (click)="authOpen=!authOpen"
-               (click)="nobuble($event)">
+          <div class="point carrot mr-4 flex-sm-right" (click)="authOpen=!authOpen" (click)="globalSvc.nobuble($event)">
             <img src="/assets/head1.svg" class="portrait">
           </div>
           <div class="dropdown-menu dropdown-menu-right dropdown-menu-carrot">

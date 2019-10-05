@@ -3,8 +3,10 @@
     <time class="gray-666 font-weight-bold">{{group.key() | amDateFormat: "YY年MM月DD日"}}</time>
     <div class="card my-2 flex-row" *ngFor="let schedule of group.toArray() | paginate: config">
       <div class="d-flex m-3">
-        <div class="mr-2"><input type="checkbox" class="circle-check cursor-default" [checked]="schedule.dateEnd"
-                 disabled></div>
+        <div class="mr-2 custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input cursor-default" [checked]="schedule.dateEnd" disabled>
+          <label class="custom-control-label custom-control-circle"></label>
+        </div>
         <span class="flex-grow-1"><a [routerLink]="['/schedules/u',schedule.user.alias,schedule.id]"
              class="">{{schedule.title}}</a></span>
       </div>

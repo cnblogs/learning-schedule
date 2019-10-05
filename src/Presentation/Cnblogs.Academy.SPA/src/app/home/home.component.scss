@@ -1,0 +1,15 @@
+@import "../../theme.scss";
+
+.title-card {
+  border-left: solid 3px #FACD01 ;
+  padding-left: .5rem;
+  color: $primary !important;
+}
+
+.portrait {
+  border-radius: 100%;
+}
+
+.active {
+  color: $primary;
+}

@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain\Cnblogs.Academy.Domain\Cnblogs.Academy.Domain.csproj" />
+    <ProjectReference Include="..\..\Domain\Cnblogs.Academy.Events\Cnblogs.Academy.Events.csproj" />
+    <ProjectReference Include="..\..\Application\Cnblogs.Academy.DTO\Cnblogs.Academy.DTO.csproj" />
+    <ProjectReference Include="..\Cnblogs.Academy.Repositories\Cnblogs.Academy.Repositories.csproj" />
+    <ProjectReference Include="..\Cnblogs.Academy.ServiceAgent\Cnblogs.Academy.ServiceAgent.csproj" />
+    <ProjectReference Include="..\Cnblogs.Academy.Cache\Cnblogs.Academy.Cache.csproj" />
+    <ProjectReference Include="..\..\Application\Cnblogs.Academy.Application\Cnblogs.Academy.Application.csproj" />
+    <ProjectReference Include="..\..\Application\Cnblogs.Academy.Subscriber\Cnblogs.Academy.Subscriber.csproj" />
+    <ProjectReference Include="..\..\Application\Cnblogs.Academy.Commands\Cnblogs.Academy.Commands.csproj" />
+    <ProjectReference Include="..\..\Application\Cnblogs.Academy.Queries\Cnblogs.Academy.Queries.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="JsonNet.ContractResolvers" Version="1.1.0" />
+    <PackageReference Include="MediatR" Version="7.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="2.2.0" />
+    <PackageReference Include="Scrutor" Version="3.1.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
+    <PackageReference Include="StackExchange.Redis.StrongName" Version="1.2.6" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="4.5.1" />
+    <PackageReference Include="Serilog" Version="2.8.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
+    <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
+    <PackageReference Include="Serilog.Sinks.Elasticsearch" Version="8.0.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="3.0.0" />
+    <PackageReference Include="EnyimMemcachedCore" Version="2.4.0" />
+    <PackageReference Include="BeatPulse" Version="3.0.0" />
+    <PackageReference Include="BeatPulse.SqlServer" Version="3.0.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.4.0" />
+  </ItemGroup>
+
+</Project>

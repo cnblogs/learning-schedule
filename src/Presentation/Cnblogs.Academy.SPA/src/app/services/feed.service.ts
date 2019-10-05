@@ -11,7 +11,7 @@ export class FeedService {
   constructor(private svc: DataService) { }
 
   list(page = 1, size = 10) {
-    return this.svc.get<Feed[]>(`api/feeds?page=${page}&size=${size}`).toPromise();
+    return this.svc.get<Feed[]>(`api/feeds?page=${page}&size=${size}`);
   }
 
   getFeeds(alias: string, page = 1, size = 10, guest = false, myself = false) {

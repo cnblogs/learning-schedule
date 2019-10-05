@@ -36,14 +36,16 @@ export class ScheduleItemEditorComponent implements OnInit, AfterViewInit {
     textarea.setSelectionRange(textarea.value.length, textarea.value.length);
   }
 
+  esc(e: any) {
+    if (!e.isComposing)
+      this.close();
+  }
+
   close() {
     this.cancel.emit();
   }
 
   async save() {
-    if (!!!this.item.title.trim()) {
-      return this.close();
-    }
     if (this.item.id < 1) {
       await this.addItem(this.item.title)
     } else {
@@ -82,11 +84,9 @@ export class ScheduleItemEditorComponent implements OnInit, AfterViewInit {
   }
 
   onEnter(e: KeyboardEvent, btn: HTMLButtonElement) {
-    if (e.code === 'Enter') {
-      if (!e.shiftKey) {
-        e.preventDefault();
-        btn.click();
-      }
+    if (!e.shiftKey) {
+      e.preventDefault();
+      btn.click();
     }
   }
 

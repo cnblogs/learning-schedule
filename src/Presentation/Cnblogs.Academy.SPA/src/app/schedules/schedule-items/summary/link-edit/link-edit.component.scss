@@ -1,0 +1,15 @@
+@import "../link/link.component.scss";
+
+.page label {
+  padding: 0 .5rem;
+  margin-bottom: 0;
+}
+
+.page label.disabled {
+  opacity: .5;
+  cursor: default;
+}
+
+.bg-unset {
+  background-color: unset;
+}

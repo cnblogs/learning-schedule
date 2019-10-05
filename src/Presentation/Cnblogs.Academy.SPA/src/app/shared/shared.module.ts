@@ -8,6 +8,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { RouterModule } from '@angular/router';
 import { NgxLoadingModule } from 'ngx-loading';
 import { TooltipModule } from 'ng2-tooltip-directive';
+import { SafeHtmlPipe } from './safe-html.pipe';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { TooltipModule } from 'ng2-tooltip-directive';
   ],
   declarations: [
     PagingComponent,
+    SafeHtmlPipe,
   ],
   exports: [
     UnlessModule,
@@ -35,7 +37,8 @@ import { TooltipModule } from 'ng2-tooltip-directive';
     PagingComponent,
     NgxPaginationModule,
     NgxLoadingModule,
-    TooltipModule
+    TooltipModule,
+    SafeHtmlPipe
   ]
 })
 export class SharedModule { }

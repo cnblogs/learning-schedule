@@ -2,14 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cnblogs.Academy.Application.Commands;
+using Cnblogs.Academy.Application.ItemCommands;
 using Cnblogs.Academy.Application.Queries;
 using Cnblogs.Academy.Application.ScheduleAppService;
 using Cnblogs.Academy.Application.ScheduleAppService.Dto;
-using Cnblogs.Academy.Application.ScheduleAppService.InputModel;
+using Cnblogs.Academy.Commands.ItemCommands;
+using Cnblogs.Academy.Commands.ScheduleCommands;
 using Cnblogs.Academy.Common;
 using Cnblogs.Academy.Domain.Schedules;
 using Cnblogs.Academy.DTO;
 using Cnblogs.Academy.DTO.InputModel;
+using Cnblogs.Academy.ServiceAgent.BlogApi;
 using Cnblogs.Academy.ServiceAgent.UCenterService;
 using Cnblogs.Domain.Abstract;
 using MediatR;
@@ -26,19 +29,27 @@ namespace Cnblogs.Academy.WebAPI.Controllers
         private readonly IUCenterService _uCenterService;
         private readonly IMediator _mediator;
         private readonly IScheduleQueries _queries;
+        private readonly IBlogApiService _blogApiSvc;
 
-        public ScheduleController(IScheduleService scheduleService, IUCenterService uCenterService, IMediator mediator, IScheduleQueries queries)
+        public ScheduleController(IScheduleService scheduleService,
+                                  IUCenterService uCenterService,
+                                  IMediator mediator,
+                                  IScheduleQueries queries,
+                                  IBlogApiService blogApiSvc)
         {
             _scheduleService = scheduleService;
             _uCenterService = uCenterService;
             _mediator = mediator;
             _queries = queries;
+            _blogApiSvc = blogApiSvc;
         }
 
+        #region Schedule
         [HttpPost]
         public async Task<BooleanResult> Post([FromBody]ScheduleInputModel input)
         {
-            return await _scheduleService.AddAsync(input, UCenterUser);
+            var command = new CreateScheduleCommand(input, UCenterUser);
+            return await _mediator.Send(command);
         }
 
         [HttpGet]
@@ -51,44 +62,15 @@ namespace Cnblogs.Academy.WebAPI.Controllers
         [HttpPatch("{id:long}")]
         public async Task Patch(long id, [FromBody]ScheduleInputModel input)
         {
-            await _scheduleService.UpdateScheduleAsync(id, input, UserId);
+            var command = new UpdateScheduleCommand(id, input, UserId);
+            await _mediator.Send(command);
         }
 
         [HttpDelete("{id:long}")]
         public async Task Delete(long id)
         {
-            await _scheduleService.DeleteScheduleAsync(id, UserId);
-        }
-
-        [HttpPost("{id:long}/items/[[markdown]]")]
-        public async Task<long> MakrdownItem(long id, [FromBody]ScheduleItemMarkdownInput input)
-        {
-            return await _scheduleService.AddItem(id, input, UCenterUser);
-        }
-
-        [HttpPatch("item/{id:long}/title")]
-        public async Task UpdateItemTitle(long id, [FromBody]ScheduleItemMarkdownInput item)
-        {
-            await _scheduleService.UpdateItemTitleWithMarkdown(id, item.Title, UserId);
-        }
-
-        [HttpDelete("item/{id:long}")]
-        public async Task DeleteItem(long id)
-        {
-            await _scheduleService.DeleteItem(id, UserId);
-        }
-
-        [HttpPost("{id:long}/items/{itemId:long}/todo")]
-        public async Task<BooleanResult> ToDo(long id, long itemId, [FromBody]ItemDoneRecordInputModel im)
-        {
-            var command = new ToDoItemCommand(id, itemId, UCenterUser);
-            return await _mediator.Send(command);
-        }
-
-        [HttpPost("{id:long}/following")]
-        public async Task<BooleanResult> Following(long id)
-        {
-            return await _scheduleService.AddFollowingAsync(id, UserId);
+            var command = new DeleteScheduleCommand(id, UserId);
+            await _mediator.Send(command);
         }
 
         [HttpGet("mine")]
@@ -99,29 +81,24 @@ namespace Cnblogs.Academy.WebAPI.Controllers
             return result.list;
         }
 
-        [HttpDelete("{scheduleId:long}/items/{itemId:long}/record")]
-        public async Task<BooleanResult> UndoItem(long scheduleId, long itemId)
-        {
-            var command = new UndoItemCommand(scheduleId, itemId, UserId);
-            return await _mediator.Send(command);
-        }
-
         [HttpPatch("{scheduleId:long}/dateEnd")]
         public async Task<BooleanResult> CompleteSchedule(long scheduleId)
         {
-            return await _scheduleService.CompleteSchedule(scheduleId, UCenterUser);
+            var command = new CompleteScheduleCommand(scheduleId, UCenterUser);
+            return await _mediator.Send(command);
         }
 
         [HttpDelete("{scheduleId:long}/dateEnd")]
         public async Task<BooleanResult> CancelComplete(long scheduleId)
         {
-            return await _scheduleService.CompleteSchedule(scheduleId, UCenterUser, cancel: true);
+            var command = new CancelScheduleCommand(scheduleId, UCenterUser);
+            return await _mediator.Send(command);
         }
 
         // [AllowAnonymous]
         [HttpGet("withItems")]
-        public async Task<PagedResults<ScheduleDetailDto>> ListWithItems(bool completed = false, string alias = "",
-            bool teachOnly = false, int page = 1, int size = 30)
+        public async Task<PagedResult<ScheduleDetailDto>> ListWithItems(bool completed = false, string alias = "",
+            int page = 1, int size = 30)
         {
             UserDto user;
             if (string.IsNullOrEmpty(alias))
@@ -132,14 +109,14 @@ namespace Cnblogs.Academy.WebAPI.Controllers
             {
                 user = await _uCenterService.GetUser(x => x.Alias, alias);
             }
-            if (user == null) return PagedResults<ScheduleDetailDto>.Empty();
+            if (user == null) return PagedResult<ScheduleDetailDto>.Empty();
 
             var hasPrivate = false;
             if (IsAuthenticated)
             {
                 hasPrivate = user.UserId == UCenterUser.UserId;
             }
-            return await _scheduleService.ListWithItemsAsync(user.UserId, hasPrivate, completed, teachOnly, page, size);
+            return await _scheduleService.ListWithItemsAsync(user.UserId, hasPrivate, completed, page, size);
         }
 
         // [AllowAnonymous]
@@ -169,6 +146,65 @@ namespace Cnblogs.Academy.WebAPI.Controllers
             await _scheduleService.UpdatePrivateAsync(scheduleId, to, UserId);
         }
 
+        [HttpPost("{id:long}/subscription")]
+        public async Task<long> Subscription(long id)
+        {
+            return await _scheduleService.SubscribeAsync(id, UserId);
+        }
+
+        [HttpGet("{id:long}/following")]
+        public async Task<IEnumerable<ScheduleFollowingDto>> Following(long id)
+        {
+            return await _queries.GetScheduleFollowings(id);
+        }
+
+        [HttpGet("options")]
+        public async Task<List<KeyValuePair<long, string>>> Options(int page = 0, int size = 10)
+        {
+            return await this._queries.GetScheduleOptions(UserId, page, size);
+        }
+
+        #endregion
+
+        #region ScheduleItem
+
+        [HttpPost("{id:long}/items/[[markdown]]")]
+        public async Task<long> MakrdownItem(long id, [FromBody]ScheduleItemMarkdownInput input)
+        {
+            var command = new AddItemCommand(id, input, UCenterUser);
+            return await _mediator.Send(command);
+        }
+
+        [HttpPatch("item/{id:long}/title")]
+        public async Task UpdateItemTitle(long id, [FromBody]ScheduleItemMarkdownInput item)
+        {
+            var command = new UpdateItemTitleCommand(id, item.Title, UserId);
+            await _mediator.Send(command);
+        }
+
+        [HttpDelete("item/{id:long}")]
+        public async Task DeleteItem(long id)
+        {
+            var command = new DeleteItemCommand(id, UserId);
+            await _mediator.Send(command);
+        }
+
+        [HttpPost("{id:long}/items/{itemId:long}/todo")]
+        [HttpPatch("{id:long}/items/{itemId:long}/completed")]
+        public async Task<BooleanResult> CompleteItem(long id, long itemId)
+        {
+            var command = new CompleteItemCommand(id, itemId, UserId);
+            return await _mediator.Send(command);
+        }
+
+        [HttpDelete("{scheduleId:long}/items/{itemId:long}/record")]
+        [HttpDelete("{scheduleId:long}/items/{itemId:long}/completed")]
+        public async Task<BooleanResult> UndoItem(long scheduleId, long itemId)
+        {
+            var command = new UndoItemCommand(scheduleId, itemId, UserId);
+            return await _mediator.Send(command);
+        }
+
         [AllowAnonymous]
         [HttpGet("item/{itemId:long}/detail")]
         public async Task<ScheduleItemDetailDto> ScheduleItemDetail(long itemId)
@@ -180,61 +216,60 @@ namespace Cnblogs.Academy.WebAPI.Controllers
             }
             return await _queries.GetScheduleItemDetailAsync(itemId, loginUserId);
         }
+        #endregion
 
-        [HttpPost("item/{itemId:long}/subtasks")]
-        public async Task<long> ScheduleItemSubTasks(long itemId, [FromBody]SubTaskInputModel im)
+        #region Summary
+
+        [HttpPost("item/{itemId:long}/summary/note")]
+        public async Task<long> AddSummaryNote(long itemId, [FromBody]SummaryNoteInputModel inputModel)
         {
-            var command = new CreateSubtaskCommand(itemId, im.Content, UserId);
+            var command = new AddSummaryNoteCommand(itemId, inputModel.Note, UCenterUser.UserId);
             return await _mediator.Send(command);
         }
 
-        [HttpPut("item/{itemId:long}/subtasks/{subtaskId:long}")]
-        public async Task AccomplishSubtask(long itemId, long subtaskId, bool completed = true)
+        [HttpGet("item/{itemId:long}/summary")]
+        public async Task<SummaryDto> GetSummary(long itemId)
         {
-            var command = new AccomplishSubtaskCommand(itemId, subtaskId, UserId, completed);
+            return await _queries.GetSummary(itemId);
+        }
+
+        [HttpPut("item/{itemId:long}/summary/note")]
+        public async Task UpdateSummaryNote(long itemId, [FromBody]SummaryNoteInputModel inputModel)
+        {
+            var command = new UpdateSummaryNoteCommand(itemId, inputModel.Id, inputModel.Note, UCenterUser.UserId);
             await _mediator.Send(command);
         }
 
-        [HttpPut("item/{itemId:long}/subtasks/{subtaskId:long}/content")]
-        public async Task UpdateSubtask(long itemId, long subtaskId, [FromBody]SubTaskInputModel im)
+        [HttpDelete("item/{itemId:long}/summary/note/{noteId:long}")]
+        public async Task DeleteSummaryNote(long itemId, long noteId)
         {
-            var command = new UpdateSubtaskCommand(itemId, subtaskId, UserId, im.Content);
+            var command = new DeleteSummaryNoteCommand(itemId, noteId, UCenterUser.UserId);
             await _mediator.Send(command);
         }
 
-        [HttpDelete("item/subtasks/{subtaskId:long}")]
-        public async Task DeleteSubtask(long subtaskId)
+        [HttpGet("summary/post/links/recent")]
+        public async Task<IEnumerable<SummaryLinkDto>> RecentPostLinks(int page = 1, int size = 10)
         {
-            var command = new DeleteSubtaskCommand(subtaskId, UserId);
-            await _mediator.Send(command);
+            if (UCenterUser.BlogId >= 0)
+            {
+                return await _blogApiSvc.RecentPostLinks(UCenterUser.BlogId, page, size);
+            }
+            return Array.Empty<SummaryLinkDto>();
         }
 
-        [HttpPost("item/{itemId:long}/references")]
-        public async Task<long> ScheduleItemReferences(long itemId, [FromBody]ReferenceInputModel im)
+        [HttpPost("item/{itemId:long}/summary/links")]
+        public async Task<long> SummaryLink(long itemId, [FromBody]SummaryLinkDto linkDto)
         {
-            var command = new CreateReferenceCommand(itemId, im.Url, UserId);
+            var command = new AddSummaryLinkCommand(itemId, UCenterUser.UserId, linkDto);
             return await _mediator.Send(command);
         }
 
-        [HttpDelete("item/references/{refId:long}")]
-        public async Task DeleteReference(long refId)
+        [HttpDelete("item/{itemId:long}/summary/links/{linkId:long}")]
+        public async Task DeleteSummaryLink(long itemId, long linkId)
         {
-            var command = new DeleteReferenceCommand(refId, UserId);
+            var command = new DeleteSummaryLinkCommand(itemId, linkId, UCenterUser.UserId);
             await _mediator.Send(command);
         }
-
-        [HttpPut("item/{itemId:long}/references/{refId:long}/url")]
-        public async Task UpdateReference(long itemId, long refId, [FromBody]ReferenceInputModel im)
-        {
-            var command = new UpdateReferenceCommand(itemId, refId, im.Url, UserId);
-            await _mediator.Send(command);
-        }
-
-        [HttpPut("item/feedback")]
-        public async Task<long> PutFeedback(FeedbackInputModel im)
-        {
-            var command = new PutFeedbackCommand(im.Id, im.ItemId, im.Content, im.Difficulty, UserId);
-            return await _mediator.Send(command);
-        }
+        #endregion
     }
 }

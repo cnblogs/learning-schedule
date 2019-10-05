@@ -3,31 +3,26 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-<!--    <PackageReference Include="Cnblogs.URelation.ServiceAgent" Version="1.0.11" />-->
-<!--    <PackageReference Include="Cnblogs.Domain.Abstract" Version="1.0.4" />-->
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.Redis" Version="0.4.1" />
     <PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="2.2.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
-    <PackageReference Include="StackExchange.Redis.StrongName" Version="1.9.3" />
+    <PackageReference Include="StackExchange.Redis.StrongName" Version="1.2.6" />
     <PackageReference Include="System.Text.Encoding.CodePages" Version="4.5.1" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Serilog" Version="2.8.0" />
-    <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.4" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
     <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
-    <PackageReference Include="Serilog.Sinks.Elasticsearch" Version="7.1.0" />
-    <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
-    <PackageReference Include="EnyimMemcachedCore" Version="2.3.0" />
-<!--    <PackageReference Include="Cnblogs.Web.ErrorPages" Version="1.0.9" />-->
-<!--    <PackageReference Include="Cnblogs.Web" Version="1.0.17" />-->
-<!--    <PackageReference Include="Cnblogs.Net" Version="2.0.3" />-->
-<!--    <PackageReference Include="Cnblogs.UCenter.ServiceAgent" Version="2.3.2" />-->
+    <PackageReference Include="Serilog.Sinks.Elasticsearch" Version="8.0.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="3.0.0" />
+    <PackageReference Include="EnyimMemcachedCore" Version="2.4.0" />
     <PackageReference Include="BeatPulse" Version="3.0.0" />
     <PackageReference Include="BeatPulse.SqlServer" Version="3.0.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.4.0" />
+
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Application\Cnblogs.Academy.Application\Cnblogs.Academy.Application.csproj" />
@@ -38,5 +33,8 @@
     <ProjectReference Include="..\..\Infrastructure\Cnblogs.CAP\Cnblogs.CAP.csproj" />
     <ProjectReference Include="..\..\Application\Cnblogs.Academy.DTO\Cnblogs.Academy.DTO.csproj" />
     <ProjectReference Include="..\..\Application\Cnblogs.Academy.Subscriber\Cnblogs.Academy.Subscriber.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Cnblogs.Academy.Bootstrap\Cnblogs.Academy.Bootstrap.csproj" />
+    <ProjectReference Include="..\..\Application\Cnblogs.Academy.Commands\Cnblogs.Academy.Commands.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Cnblogs.Academy.Common\Cnblogs.Academy.Common.csproj" />
   </ItemGroup>
 </Project>

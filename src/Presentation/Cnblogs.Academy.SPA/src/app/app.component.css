@@ -1,0 +1,22 @@
+.full-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.full-screen .container {
+  flex: 1;
+}
+
+footer {
+  border-top: solid 1px #eeeeee;
+  padding: .5rem 0;
+  text-align: center;
+  color: #fff;
+  letter-spacing: 1px;
+  color:  #999999;
+}
+
+footer a {
+color:  #999999;
+}

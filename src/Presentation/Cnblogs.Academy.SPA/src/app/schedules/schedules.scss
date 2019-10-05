@@ -2,6 +2,12 @@
   filter: grayscale(100%);
 }
 
+.iconfont-lg {
+  font-weight: 900;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
 .icon {
   position: relative;
   top: -1px;
@@ -18,4 +24,12 @@
 
 .v-hidden {
   visibility: hidden;
+}
+
+.bg-green-light {
+  background-color: rgba(0,0,0,0.01);
+}
+
+.border-top {
+  border-top:  solid 1px #dee2e691 !important;
 }

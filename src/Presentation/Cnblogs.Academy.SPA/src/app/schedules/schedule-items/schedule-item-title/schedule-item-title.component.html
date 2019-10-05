@@ -1,29 +1,45 @@
-<div *appBoard="item.id" class="light-row d-flex justify-content-between position-relative">
-  <app-pan-menu [completed]="item.completed" (edit)="modalSvc.open(item.id)" (delete)="delItem();panSvc.closeMenu(ele)"
-                (checked)="todoItem(item);panSvc.closeMenu(ele)">
-  </app-pan-menu>
+<div [class.bg-green-light]="summary_open">
+  <div *appBoard="item.id" class="light-row d-flex justify-content-between position-relative">
+    <app-pan-menu (edit)="modalSvc.open(item.id)" (delete)="delItem();panSvc.closeMenu(ele)"
+                  (checked)="todoItem(item);panSvc.closeMenu(ele)">
+    </app-pan-menu>
 
-  <div #ele class="d-flex light-prefix flex-grow-1 pan-container" (panstart)="panStart(ele,$event)"
-       (panmove)="panMove($event,ele)" (panend)="panEnd(ele)">
-    <div class="d-flex flex-column justify-content-center mr-2 ml-sm-2">
-      <input type="checkbox" [checked]="item.completed" class="circle-check" (click)="todoItem(item,$event)"
-             [disabled]='disabled'>
+    <div #ele class="d-flex light-prefix flex-grow-1 pan-container" (panstart)="panStart(ele,$event)"
+         (panmove)="panMove($event,ele)" (panend)="panEnd(ele)">
+      <div class="custom-control custom-checkbox ml-sm-2 align-self-center">
+        <input type="checkbox" [checked]="item.completed" class="custom-control-input" (click)="todoItem(item,$event)"
+               [disabled]='disabled' id="{{item.id}}-i">
+        <label class="custom-control-label custom-control-circle pointer" for="{{item.id}}-i"></label>
+      </div>
+
+      <button class="px-3 text-primary iconfont icon-lg icon-jizhang btn-none" (click)="openSummaryPannel()"
+              tooltip="学习心得" placement="top" display-mobile=false>
+      </button>
+
+      <div class="flex-grow-1 d-flex flex-wrap flex-md-nowrap">
+        <div [innerHTML]="item.html" class="p-mb-0 world-keep align-self-center flex-grow-1 py-2" appExtenalLinks
+             (click)="open.emit(item.id)"></div>
+      </div>
     </div>
-    <div class="flex-grow-1 d-flex flex-wrap flex-md-nowrap">
-      <div [innerHTML]="item.html" class="p-mb-0 world-keep align-self-center flex-grow-1 py-2" appExtenalLinks
-           (click)="open.emit(item.id)"></div>
+
+    <div class="light-ellipses d-flex py-2">
+      <ng-container *ngIf="!disabled">
+        <i class="iconfont iconfont-lg icon-editor mr-2 btn-link" (click)="openEdit(item.id)" tooltip="编辑学习任务"
+           placement="bottom" display-mobile=false></i>
+        <i class="iconfont iconfont-lg icon-empty mr-2 btn-link" (click)="delItem(item.id)" tooltip="删除学习任务"
+           placement="bottom" display-mobile=false></i>
+      </ng-container>
     </div>
   </div>
 
-  <div class="light-ellipses d-flex py-2" *ngIf="!disabled">
-    <img src="/assets/edit.svg" class="point ml-2" [modalOpen]="item.id" tooltip="编辑学习任务" placement="bottom"
-         display-mobile=false>
-    <button class="oi oi-x gray-999-i point mx-2 oi-rel" (click)="delItem(item.id)" tooltip="删除学习任务" placement="bottom"
-            display-mobile=false></button>
+  <div *appModal="item.id">
+    <app-schedule-item-editor (cancel)="modalSvc.close(item.id)" [item]="item" (update)="modalSvc.close(item.id)">
+    </app-schedule-item-editor>
   </div>
-</div>
 
-<div *appModal="item.id">
-  <app-schedule-item-editor (cancel)="modalSvc.close(item.id)" [item]="item" (update)="modalSvc.close(item.id)">
-  </app-schedule-item-editor>
+
+  <div *ngIf="summary_open" class="ml-4">
+    <app-summary [itemId]="item.id" [readonly]="disabled"></app-summary>
+  </div>
+
 </div>

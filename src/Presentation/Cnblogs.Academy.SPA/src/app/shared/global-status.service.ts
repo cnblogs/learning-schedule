@@ -12,4 +12,8 @@ export class GlobalStatusService {
   globalClick(event: Event) {
     this.clickRootSource.next(event);
   }
+
+  nobuble(e: Event) {
+    e.stopPropagation();
+  }
 }

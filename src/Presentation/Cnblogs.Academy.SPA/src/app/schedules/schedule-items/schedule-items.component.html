@@ -1,10 +1,8 @@
-<div class="position-relative flex-grow-1">
-  <div class="flex-grow-1 margin-1 position-relative h-100" [class.forbidden]="completed">
-    <div class="sleeve left" *ngIf="hasPrev" (click)="prev()"></div>
+<div class="d-flex flex-column flex-grow-1">
+  <div class="d-flex flex-column flex-grow-1" [class.forbidden]="completed">
 
-    <div class="waistcoat">
-
-      <ul class="mb-0" [@listAnimation]="source.length">
+    <div class="flex-grow-1">
+      <ul class="mb-0">
         <li *ngFor="let item of items" class="items">
           <div class="d-flex">
             <div class="flex-grow-1 bb">
@@ -15,7 +13,6 @@
           </div>
         </li>
       </ul>
-
       <div class="ml-3" *ngIf="!hasNext && !completed && owner">
         <div *appBoard="scheduleId" [modalOpen]="scheduleId" class="point py-2 bb grayless">
           <img src="/assets/addition.svg" class="gray-icon mr-2 icon pl-sm-2">
@@ -26,13 +23,14 @@
                                     (insert)="addItem($event);modalSvc.close(scheduleId)"></app-schedule-item-editor>
         </div>
       </div>
-
     </div>
 
-    <div class="sleeve right" *ngIf="hasNext" (click)="next()"></div>
-
-    <div class="paging" *ngIf="totalPage > 1" (swipeleft)="next()" (swiperight)="prev()">
-      <span *ngFor="let i of pageArray" [class.active]="i == pageIndex" (click)="goToPage(i)"></span>
+    <div class="d-flex justify-content-between">
+      <div class="sleeve left" [class.hide]="!hasPrev" (click)="prev()"></div>
+      <div class="paging" *ngIf="totalPage > 1" (swipeleft)="next()" (swiperight)="prev()">
+        <span *ngFor="let i of pageArray" [class.active]="i == pageIndex" (click)="goto(i)"></span>
+      </div>
+      <div class="sleeve right" [class.hide]="!hasNext" (click)="next()"></div>
     </div>
   </div>
 </div>

@@ -5,6 +5,10 @@ namespace Cnblogs.Academy.Domain
     public class AppConst
     {
         public static string AppId { get; set; }
+        public static Guid AppGuid { get => Guid.Parse(AppId); }
+        public const string ProviderTenancyOwner = "Academy.CourseMall.Tennacy.Owner";
+
+        public const string ProviderTenancyName = "Academy.CourseMall.Tenancy";
 
         private static string _domainAddress;
         public static string DomainAddress

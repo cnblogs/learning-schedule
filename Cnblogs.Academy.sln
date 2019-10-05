@@ -1,6 +1,7 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29324.140
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AFAA0841-BD93-466F-B8F4-FB4EEC86F1FC}"
 EndProject
@@ -12,37 +13,43 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcademyUnitTest", "test\Aca
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{4351A6AB-6DEC-4945-B151-837FEEE08D20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cnblogs.Academy.Domain", "src\Domain\Cnblogs.Academy.Domain\Cnblogs.Academy.Domain.csproj", "{E3B2A85A-7422-4FE2-B990-BF79B85488F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cnblogs.Academy.Domain", "src\Domain\Cnblogs.Academy.Domain\Cnblogs.Academy.Domain.csproj", "{E3B2A85A-7422-4FE2-B990-BF79B85488F1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{954C4224-8F2E-43A4-AD7F-0A70FC8D8096}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cnblogs.Academy.Application", "src\Application\Cnblogs.Academy.Application\Cnblogs.Academy.Application.csproj", "{BC615F76-58BA-44DC-8BF3-E848742ECF8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cnblogs.Academy.Application", "src\Application\Cnblogs.Academy.Application\Cnblogs.Academy.Application.csproj", "{BC615F76-58BA-44DC-8BF3-E848742ECF8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cnblogs.Academy.Repositories", "src\Infrastructure\Cnblogs.Academy.Repositories\Cnblogs.Academy.Repositories.csproj", "{958D8CDD-0DD1-4D4A-B66B-DD5CB51D1D57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cnblogs.Academy.Repositories", "src\Infrastructure\Cnblogs.Academy.Repositories\Cnblogs.Academy.Repositories.csproj", "{958D8CDD-0DD1-4D4A-B66B-DD5CB51D1D57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cnblogs.Domain.Abstract", "src\Domain\Cnblogs.Domain.Abstract\Cnblogs.Domain.Abstract.csproj", "{68DACB9D-18E1-4E9D-B209-107D4E41AFE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cnblogs.Domain.Abstract", "src\Domain\Cnblogs.Domain.Abstract\Cnblogs.Domain.Abstract.csproj", "{68DACB9D-18E1-4E9D-B209-107D4E41AFE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cnblogs.CAP", "src\Infrastructure\Cnblogs.CAP\Cnblogs.CAP.csproj", "{D0854496-75B9-422A-9576-FC342973C704}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cnblogs.CAP", "src\Infrastructure\Cnblogs.CAP\Cnblogs.CAP.csproj", "{D0854496-75B9-422A-9576-FC342973C704}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{B7A88A21-0F68-451C-9F59-8CA42AC92D68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cnblogs.Academy.WebAPI", "src\Presentation\Cnblogs.Academy.WebAPI\Cnblogs.Academy.WebAPI.csproj", "{14982DDD-FB5E-47B8-9D96-3F6493CB9E36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cnblogs.Academy.WebAPI", "src\Presentation\Cnblogs.Academy.WebAPI\Cnblogs.Academy.WebAPI.csproj", "{14982DDD-FB5E-47B8-9D96-3F6493CB9E36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cnblogs.Academy.ServiceAgent", "src\Infrastructure\Cnblogs.Academy.ServiceAgent\Cnblogs.Academy.ServiceAgent.csproj", "{E0CABA15-40EC-464A-A504-5A994E4F423F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cnblogs.Academy.ServiceAgent", "src\Infrastructure\Cnblogs.Academy.ServiceAgent\Cnblogs.Academy.ServiceAgent.csproj", "{E0CABA15-40EC-464A-A504-5A994E4F423F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cnblogs.Academy.DTO", "src\Application\Cnblogs.Academy.DTO\Cnblogs.Academy.DTO.csproj", "{4D798929-9B83-4887-85F8-E7A25DD68B83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cnblogs.Academy.DTO", "src\Application\Cnblogs.Academy.DTO\Cnblogs.Academy.DTO.csproj", "{4D798929-9B83-4887-85F8-E7A25DD68B83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cnblogs.Academy.Cache", "src\Infrastructure\Cnblogs.Academy.Cache\Cnblogs.Academy.Cache.csproj", "{60F2EEB2-C990-4CB1-B81E-8583645A691D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cnblogs.Academy.Cache", "src\Infrastructure\Cnblogs.Academy.Cache\Cnblogs.Academy.Cache.csproj", "{60F2EEB2-C990-4CB1-B81E-8583645A691D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cnblogs.Academy.Subscriber", "src\Application\Cnblogs.Academy.Subscriber\Cnblogs.Academy.Subscriber.csproj", "{1B5C42BF-DC42-4117-8D8C-EF2D947C374D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cnblogs.Academy.Subscriber", "src\Application\Cnblogs.Academy.Subscriber\Cnblogs.Academy.Subscriber.csproj", "{1B5C42BF-DC42-4117-8D8C-EF2D947C374D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cnblogs.Academy.Events", "src\Domain\Cnblogs.Academy.Events\Cnblogs.Academy.Events.csproj", "{110C5598-5337-4CE6-A47C-3A54209A5C72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cnblogs.Academy.Events", "src\Domain\Cnblogs.Academy.Events\Cnblogs.Academy.Events.csproj", "{110C5598-5337-4CE6-A47C-3A54209A5C72}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cnblogs.Academy.Common", "src\Infrastructure\Cnblogs.Academy.Common\Cnblogs.Academy.Common.csproj", "{9F2DC1F0-88E3-4DEE-A271-41D6F8C68B6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cnblogs.Academy.Common", "src\Infrastructure\Cnblogs.Academy.Common\Cnblogs.Academy.Common.csproj", "{9F2DC1F0-88E3-4DEE-A271-41D6F8C68B6A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mock", "Mock", "{9C16EC55-5DFC-4558-8521-93E49EA09462}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIMock", "src\Mock\APIMock\APIMock.csproj", "{8AED1B46-E734-4064-9A4D-779CEC86E25E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIMock", "src\Mock\APIMock\APIMock.csproj", "{8AED1B46-E734-4064-9A4D-779CEC86E25E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cnblogs.Academy.Bootstrap", "src\Infrastructure\Cnblogs.Academy.Bootstrap\Cnblogs.Academy.Bootstrap.csproj", "{8B9E5E6D-56B7-4F6F-B7A0-928E25CD90EC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cnblogs.Academy.Commands", "src\Application\Cnblogs.Academy.Commands\Cnblogs.Academy.Commands.csproj", "{E8F58441-75F9-41CF-BC37-07F54F2B91A6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cnblogs.Academy.Queries", "src\Application\Cnblogs.Academy.Queries\Cnblogs.Academy.Queries.csproj", "{C3C8018A-8B54-4142-B1C5-7ECC6D65C943}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -222,6 +229,42 @@ Global
 		{8AED1B46-E734-4064-9A4D-779CEC86E25E}.Release|x64.Build.0 = Release|Any CPU
 		{8AED1B46-E734-4064-9A4D-779CEC86E25E}.Release|x86.ActiveCfg = Release|Any CPU
 		{8AED1B46-E734-4064-9A4D-779CEC86E25E}.Release|x86.Build.0 = Release|Any CPU
+		{8B9E5E6D-56B7-4F6F-B7A0-928E25CD90EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B9E5E6D-56B7-4F6F-B7A0-928E25CD90EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B9E5E6D-56B7-4F6F-B7A0-928E25CD90EC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8B9E5E6D-56B7-4F6F-B7A0-928E25CD90EC}.Debug|x64.Build.0 = Debug|Any CPU
+		{8B9E5E6D-56B7-4F6F-B7A0-928E25CD90EC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8B9E5E6D-56B7-4F6F-B7A0-928E25CD90EC}.Debug|x86.Build.0 = Debug|Any CPU
+		{8B9E5E6D-56B7-4F6F-B7A0-928E25CD90EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B9E5E6D-56B7-4F6F-B7A0-928E25CD90EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B9E5E6D-56B7-4F6F-B7A0-928E25CD90EC}.Release|x64.ActiveCfg = Release|Any CPU
+		{8B9E5E6D-56B7-4F6F-B7A0-928E25CD90EC}.Release|x64.Build.0 = Release|Any CPU
+		{8B9E5E6D-56B7-4F6F-B7A0-928E25CD90EC}.Release|x86.ActiveCfg = Release|Any CPU
+		{8B9E5E6D-56B7-4F6F-B7A0-928E25CD90EC}.Release|x86.Build.0 = Release|Any CPU
+		{E8F58441-75F9-41CF-BC37-07F54F2B91A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8F58441-75F9-41CF-BC37-07F54F2B91A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8F58441-75F9-41CF-BC37-07F54F2B91A6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E8F58441-75F9-41CF-BC37-07F54F2B91A6}.Debug|x64.Build.0 = Debug|Any CPU
+		{E8F58441-75F9-41CF-BC37-07F54F2B91A6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E8F58441-75F9-41CF-BC37-07F54F2B91A6}.Debug|x86.Build.0 = Debug|Any CPU
+		{E8F58441-75F9-41CF-BC37-07F54F2B91A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8F58441-75F9-41CF-BC37-07F54F2B91A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8F58441-75F9-41CF-BC37-07F54F2B91A6}.Release|x64.ActiveCfg = Release|Any CPU
+		{E8F58441-75F9-41CF-BC37-07F54F2B91A6}.Release|x64.Build.0 = Release|Any CPU
+		{E8F58441-75F9-41CF-BC37-07F54F2B91A6}.Release|x86.ActiveCfg = Release|Any CPU
+		{E8F58441-75F9-41CF-BC37-07F54F2B91A6}.Release|x86.Build.0 = Release|Any CPU
+		{C3C8018A-8B54-4142-B1C5-7ECC6D65C943}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3C8018A-8B54-4142-B1C5-7ECC6D65C943}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3C8018A-8B54-4142-B1C5-7ECC6D65C943}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C3C8018A-8B54-4142-B1C5-7ECC6D65C943}.Debug|x64.Build.0 = Debug|Any CPU
+		{C3C8018A-8B54-4142-B1C5-7ECC6D65C943}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C3C8018A-8B54-4142-B1C5-7ECC6D65C943}.Debug|x86.Build.0 = Debug|Any CPU
+		{C3C8018A-8B54-4142-B1C5-7ECC6D65C943}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3C8018A-8B54-4142-B1C5-7ECC6D65C943}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3C8018A-8B54-4142-B1C5-7ECC6D65C943}.Release|x64.ActiveCfg = Release|Any CPU
+		{C3C8018A-8B54-4142-B1C5-7ECC6D65C943}.Release|x64.Build.0 = Release|Any CPU
+		{C3C8018A-8B54-4142-B1C5-7ECC6D65C943}.Release|x86.ActiveCfg = Release|Any CPU
+		{C3C8018A-8B54-4142-B1C5-7ECC6D65C943}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -246,6 +289,9 @@ Global
 		{9F2DC1F0-88E3-4DEE-A271-41D6F8C68B6A} = {1AE73193-A709-4809-AC2E-EA217091A1AA}
 		{9C16EC55-5DFC-4558-8521-93E49EA09462} = {AFAA0841-BD93-466F-B8F4-FB4EEC86F1FC}
 		{8AED1B46-E734-4064-9A4D-779CEC86E25E} = {9C16EC55-5DFC-4558-8521-93E49EA09462}
+		{8B9E5E6D-56B7-4F6F-B7A0-928E25CD90EC} = {1AE73193-A709-4809-AC2E-EA217091A1AA}
+		{E8F58441-75F9-41CF-BC37-07F54F2B91A6} = {954C4224-8F2E-43A4-AD7F-0A70FC8D8096}
+		{C3C8018A-8B54-4142-B1C5-7ECC6D65C943} = {954C4224-8F2E-43A4-AD7F-0A70FC8D8096}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CF286632-D54B-4712-A288-30A878DFC014}

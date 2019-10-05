@@ -1,5 +1,5 @@
 import { BrowserModule, BrowserTransferStateModule, Title, HAMMER_GESTURE_CONFIG, HammerGestureConfig } from '@angular/platform-browser';
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler, ApplicationRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,6 +22,8 @@ import { AuthComponent } from './auth/auth.component';
 import { HomeComponent } from './home/home.component';
 import { FeedItemModule } from './feed-item/feed-item.module';
 import { ReleaseComponent } from './about/release/release.component';
+import { ServerResponseService } from './services/server-response';
+import { AdminGuardService } from './admin-guard.service';
 
 export class MyHammerConfig extends HammerGestureConfig {
   overrides = <any>{
@@ -63,13 +65,17 @@ export class MyHammerConfig extends HammerGestureConfig {
     { provide: HTTP_INTERCEPTORS, useClass: AppHttpInterceptor, multi: true },
     DataService,
     AuthGuardService,
+    AdminGuardService,
     Title,
     {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: MyHammerConfig
-    }
+    },
+    ServerResponseService
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  
+}
 

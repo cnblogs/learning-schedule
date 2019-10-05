@@ -1,4 +1,4 @@
-<pagination-template #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event">
+<pagination-template #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event" [ngClass]="myclass">
 
   <ul (click)="onChange()" class="">
     <li class="item mr-sm-1" *ngIf="!p.isFirstPage()">

@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { ScheduleDetail, AcademyUser } from '../schedule';
 import { PaginationInstance } from 'ngx-pagination';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ModalService } from '../modal/modal.service';
 import { PanMenuService } from '../pan-menu/pan-menu.service';
 import { SwitcherService } from '../switcher.service';
@@ -27,23 +27,26 @@ export class ScheduleIndexComponent implements OnInit, OnDestroy {
     currentPage: 1,
     totalItems: 10
   };
-  teachOnly = false;
   completedOnly = false;
   alias: string;
+  loading = false;
   private subscription: Subscription;
+  authorized: boolean;
+  returnUrl: string;
 
   constructor(
     private svc: SchedulesService,
     private route: ActivatedRoute,
+    private router: Router,
     public modalSvc: ModalService,
     public panSvc: PanMenuService,
     switcherSvc: SwitcherService,
     private authSvc: AuthService,
-    public permissionSvc: PermissionService) {
+    public permissionSvc: PermissionService,
+    @Inject('BASE_URL') private baseUrl: string) {
     this.subscription = switcherSvc.newoneModal$.subscribe(x => {
       this.modalSvc.toggle('newone');
     });
-    this.teachOnly = this.permissionSvc.inTeach;
     this.completedOnly = route.snapshot.url.some(x => x.path === 'done');
     this.alias = getRouterParam(route.snapshot.root);
   }
@@ -51,12 +54,22 @@ export class ScheduleIndexComponent implements OnInit, OnDestroy {
   async ngOnInit() {
     if (!!!this.alias) {
       const result = await this.authSvc.getPrivacy().toPromise();
-      this.alias = result.value.alias;
+      this.authorized = result.success;
+      if (result.success) {
+        this.alias = result.value.alias;
+      }
+      else {
+        this.returnUrl = new URL(this.router.url, this.baseUrl).href;
+        return false;
+      }
     }
+    this.loading = true;
     this.route.queryParams.subscribe(async x => {
       const p = +x['page'] || 1;
       this.config.currentPage = p;
-      const result = await this.svc.listWithItems(this.alias, this.completedOnly, this.teachOnly, this.config.currentPage, this.config.itemsPerPage);
+      const result = await this.svc.listWithItems(this.alias, this.completedOnly,
+        this.config.currentPage, this.config.itemsPerPage)
+        .finally(() => this.loading = false);
       this.config.totalItems = +result.totalCount;
       this.list = result.items;
 
@@ -67,6 +80,7 @@ export class ScheduleIndexComponent implements OnInit, OnDestroy {
           clearTimeout(id);
         }, 10);
       }
+      this.loading = false;
     });
   }
 

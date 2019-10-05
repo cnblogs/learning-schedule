@@ -1,0 +1,22 @@
+<div class="mb-5">
+  <div class="d-flex justify-content-start content-sm-center">
+    <ul class="nav">
+      <li class="nav-item left" [routerLinkActive]="['active']">
+        <a [routerLink]="['doing']">
+          <img src="/assets/leaf2.svg" class="pr-2 pb-1">进行中
+        </a>
+      </li>
+      <li class="nav-item right" [routerLinkActive]="['active']">
+        <a [routerLink]="['done']">
+          <img src="/assets/leaf2.svg" class="pr-2 pb-1">已完成
+        </a>
+      </li>
+    </ul>
+    <div class="ml-auto over-head" (click)="toggle()" *ngIf="permissionSvc.Owner">
+      <span class="addition" role="button" tooltip="发布学习计划" [options]="tooltipOptions"></span>
+    </div>
+  </div>
+
+  <router-outlet></router-outlet>
+
+</div>

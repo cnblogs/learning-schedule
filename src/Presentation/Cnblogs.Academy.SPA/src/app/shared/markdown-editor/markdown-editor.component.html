@@ -1,21 +1,19 @@
-<!-- <div class="md">
+<div class="md">
   <ul>
     <li [class.active]="!inRender" (click)="write()">
-      <a href="javascript:void(0);">
-        <label for="{{id}}" class="mb-0">Write</label>
-      </a>
+      <label for="{{id}}" class="mb-0 small text-primary border-primary">编辑</label>
     </li>
     <li [class.active]="inRender" (click)="preview()">
-      <a href="javascript:void(0);">Preview</a>
+      <label class="mb-0 small text-primary border-primary">预览</label>
     </li>
   </ul>
 
-  <div [class.hidden]="inRender">
+  <div *ngIf="!inRender">
+    <textarea id="{{id}}" [(ngModel)]='rawContent' (ngModelChange)="onInput($event)" (keydown)="onKey($event)"
+              appFocusOnShow class="gray-666 small mt-2"></textarea>
   </div>
 
-  <div [class.hidden]="!inRender">
-    <div [innerHTML]="htmlContent" class="preview mt-2" appExtenalLinks></div>
+  <div *ngIf="inRender">
+    <div [innerHTML]="htmlContent" class="preview my-2 small bg-white" appExtenalLinks></div>
   </div>
-</div> -->
-<textarea id="{{id}}" [(ngModel)]='rawContent' (ngModelChange)="onInput($event)" (keydown)="onKey($event)" rows=1
-          appFocusOnShow autosize></textarea>
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ViewChild, ElementRef } from '@angular/core';
 import { Schedule, ScheduleDetail } from '../schedule';
 import { ToastrService } from 'ngx-toastr';
 import { ModalService } from '../modal/modal.service';
@@ -28,11 +28,12 @@ export class ScheduleComponent implements OnInit {
     private toastr: ToastrService,
     public modalSvc: ModalService,
     public panSvc: PanMenuService,
-    private eleRef: ElementRef,
     private authSvc: AuthService) { }
 
   ngOnInit() {
   }
+
+  @ViewChild('block', { static: false }) block: ElementRef;
 
   get completed() {
     return this.schedule.dateEnd;
@@ -106,6 +107,13 @@ export class ScheduleComponent implements OnInit {
     }
   }
 
+  openEdit(modalId: string) {
+    if (this.schedule.parentId > 0) {
+      return Swal.fire('很抱歉', '借鉴来的学习计划不允许修改');
+    }
+    this.modalSvc.open(modalId);
+  }
+
   async updateSchedule(schedule: Schedule) {
     this.schedule.title = schedule.title;
     this.schedule.isPrivate = schedule.isPrivate;
@@ -135,8 +143,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   scrollCenter() {
-    const ele = this.eleRef.nativeElement as HTMLElement;
-    ele.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    this.block.nativeElement.scrollIntoView({ block: 'center', behavior: 'smooth' });
   }
 
   async togglePrivate(schedule: Schedule) {

@@ -1,0 +1,23 @@
+<div>
+  <ul class="list-group list-group-flush pl-0">
+    <li *ngFor="let post of postLinks" class="list-group-item border-0 bg-unset">
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" (change)="onChange($event, post)" [checked]="bind(post)" class="custom-control-input"
+               id="{{itemId}}-{{post.postId}}-link">
+        <label class="custom-control-label small" for="{{itemId}}-{{post.postId}}-link">
+          <a [href]="post.link" target="_blank">{{post.title}}</a>
+        </label>
+      </div>
+    </li>
+  </ul>
+
+  <div class="d-flex justify-content-between">
+    <div class="page text-primary pl-2">
+      <label (click)="prev()" [class.disabled]="!hasPrev" class="pointer">&lt;&lt;</label>
+      <label (click)="next()" [class.disabled]="!hasNext" class="pointer">&gt;&gt;</label>
+    </div>
+    <div class="">
+      <button class="btn btn-sm btn-link oi oi-caret-top" (click)="close.emit()"> 收起</button>
+    </div>
+  </div>
+</div>

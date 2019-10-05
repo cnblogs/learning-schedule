@@ -1,13 +1,14 @@
-<form #headerForm="ngForm" (ngSubmit)="headerForm.form.valid ? save() : null" (keydown.esc)="close()">
+<form #headerForm="ngForm" (ngSubmit)="headerForm.form.valid ? save() : null">
   <div class="row">
     <div class="col-sm-12 col-md-auto flex-grow-1 row py-1">
       <div class="d-flex col-md-auto flex-grow-1">
-        <div class="d-flex flex-column mr-2 mt-2">
-          <input type="checkbox" class="circle-check" disabled [checked]="completed">
+        <div class="d-flex flex-column mr-2 custom-control custom-checkbox align-self-center">
+          <input type="checkbox" class="custom-control-input" disabled [checked]="completed">
+          <label class="custom-control-label custom-control-circle"></label>
         </div>
         <div class="w-100 d-flex flex-wrap">
-          <input name="title" class="slim gray-666 ph" [(ngModel)]="title" #input="ngModel"
-                 [ngModelOptions]="{updateOn: 'submit'}" required minlength="2" maxlength="200" placeholder="发布学习目标" />
+          <input name="title" class="slim gray-666 ph" [(ngModel)]="title" #input="ngModel" (keydown.esc)="esc($event)"
+                 [ngModelOptions]="{updateOn: 'submit'}" required minlength="2" maxlength="200" placeholder="创建学习计划" />
 
           <div *ngIf="input.invalid && (input.dirty || input.touched)" class="px-0 px-md col-sm-6 col-md-auto d-flex">
             <small class="text-danger align-self-center">

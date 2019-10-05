@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,7 +35,7 @@ namespace Cnblogs.Academy.WebAPI.Controllers
 
         [AllowAnonymous]
         [HttpGet("{alias}")]
-        public async Task<ActionResult<PagedResults<FeedDto>>> GetFeeds(string alias, int page = 1, int size = 10, bool guest = false, bool myself = false)
+        public async Task<ActionResult<PagedResult<FeedDto>>> GetFeeds(string alias, int page = 1, int size = 10, bool guest = false, bool myself = false)
         {
             if (guest)
             {
@@ -55,7 +56,7 @@ namespace Cnblogs.Academy.WebAPI.Controllers
                     }
                     return await _feedsAppSvc.GetConcernFeeds(page, size, UCenterUser.UserId);
                 }
-                return PagedResults<FeedDto>.Empty();
+                return PagedResult<FeedDto>.Empty();
             }
         }
 

@@ -6,6 +6,9 @@
     <ProjectReference Include="..\..\Domain\Cnblogs.Academy.Events\Cnblogs.Academy.Events.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>

@@ -1,8 +1,9 @@
-$body-bg:#F5F5F5;
+@import "./theme.scss";
 $input-focus-box-shadow: unset;
 $custom-file-text: (
   cn: "浏览"
 );
+$breadcrumb-divider: quote(">");
 @import "~bootstrap/scss/bootstrap";
 @import '~ngx-toastr/toastr.css';
 
@@ -10,42 +11,33 @@ $custom-file-text: (
 body {
     font-family: 'PingFang SC', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !important;
     letter-spacing: 1.5px;
-    color: #666666;
+    color: $g-6;
 }
 
 a {
-  color: #666666;
+  color: $primary;
+  font-weight: normal;
 }
 
 a:hover {
-  color: #7ab97c;
+  color: #448b41;
   text-decoration: none;
 }
 
 .gray-333 {
-  color: #333333;
+  color: $g-3;
 }
 
 .gray-666 {
-  color: #666666;
+  color: $g-6;
 }
 
 .gray-999 {
-  color: #999999;
+  color: $g-9;
 }
 
 .gray-999-i {
-  color: #999999 !important;
-}
-
-.full-screen {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-.full-screen .content {
-    flex: 1;
+  color: $g-9 !important;
 }
 
 .right-middle {
@@ -66,19 +58,6 @@ a:hover {
 .modal {
     display: unset !important;
     bottom: unset !important;
-}
-
-footer {
-    border-top: solid 1px #eeeeee;
-    padding: .5rem 0;
-    text-align: center;
-    color: #fff;
-    letter-spacing: 1px;
-    color:  #999999;
-}
-
-footer a {
-  color:  #999999;
 }
 
 .open > .collapse {
@@ -102,6 +81,10 @@ footer a {
 
 .point {
   cursor: pointer;
+}
+
+.pointer {
+  @extend .point
 }
 
 .cursor-default {
@@ -166,7 +149,7 @@ img {
 
 //override sweetalert
 .swal2-confirm,.swal2-help,.swal2-ok {
-  background-color: #7ab97c !important;
+  background-color: $primary !important;
 }
 .swal2-danger {
   background-color: #e64942 !important;
@@ -186,19 +169,19 @@ img {
 
 .tooltip {
   border-radius: 3px !important;
-  background-color: #333333 !important;
+  background-color: $g-3 !important;
   box-shadow: none !important;
   color: #eeeeee !important;
   font-size: 12px !important;
 }
 
 .tooltip-arrow {
-  background-color: #333333 !important;
+  background-color: $g-3 !important;
 }
 
 .circle-check {
   appearance: none;
-	border: 1px solid #999999;
+	border: 1px solid $g-9;
 	padding: .5rem !important;
 	border-radius: 100%;
 	display: inline-block;
@@ -258,5 +241,63 @@ img {
 }
 
 :-moz-ui-invalid {
-  box-shadow:none;
+  box-shadow: none;
+}
+
+.oi-top-0 {
+  top: 0;
+}
+
+.btn-tiny {
+  padding: 0.3rem 0.35rem;
+  font-size: 0.5rem;
+  line-height: 1;
+  border-radius: 0.2rem;
+}
+
+.btn-primary {
+  color: #FFFFFF;
+}
+
+.btn-none {
+  appearance: none;
+  border: none;
+  outline: none !important;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+.my-pagination > * {
+  font-size: 12px;
+}
+.my-pagination .ngx-pagination a, .ngx-pagination button {
+  color: $g-6 !important;
+  outline: none;
+}
+.my-pagination ul {
+  padding-left: 0;
+}
+.my-pagination .ngx-pagination .current {
+  background: $primary;
+}
+
+.custom-checkbox .custom-control-circle::before {
+  border-radius: 100%;
+}
+.custom-control-circle::before {
+  top: 0.125rem;
+  left: -1.25rem;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+.custom-control-circle::after {
+  top: 0.125rem;
+  left: -1.25rem;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+button:focus {
+  outline: none;
 }

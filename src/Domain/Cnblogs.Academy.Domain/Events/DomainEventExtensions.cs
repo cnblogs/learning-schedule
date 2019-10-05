@@ -1,5 +1,4 @@
 using System;
-using System.ComponentModel;
 
 namespace Cnblogs.Academy.Domain.Events
 {
@@ -7,8 +6,8 @@ namespace Cnblogs.Academy.Domain.Events
     {
         public static string GetEventName(this IDomainEvent e)
         {
-            var attribute = (DescriptionAttribute)Attribute.GetCustomAttribute(e.GetType(), typeof(DescriptionAttribute));
-            return attribute?.Description;
+            var attribute = (EventNameAttribute)Attribute.GetCustomAttribute(e.GetType(), typeof(EventNameAttribute));
+            return attribute?.Name;
         }
     }
 }

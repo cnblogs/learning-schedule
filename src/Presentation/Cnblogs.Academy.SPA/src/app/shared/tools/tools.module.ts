@@ -5,6 +5,7 @@ import { FocusOnShowDirective } from './focus-on-show.directive';
 import { HighlightCodeDirective } from './highlight-code.directive';
 import { ExtenalLinksDirective } from './extenal-links.directive';
 import { AutosizeDirective } from './autosize.directive';
+import { GobackDirective } from './goback.directive';
 
 @NgModule({
   imports: [
@@ -16,13 +17,15 @@ import { AutosizeDirective } from './autosize.directive';
     HighlightCodeDirective,
     ExtenalLinksDirective,
     AutosizeDirective,
+    GobackDirective,
   ],
   exports: [
     CountdownDirective,
     FocusOnShowDirective,
     HighlightCodeDirective,
     ExtenalLinksDirective,
-    AutosizeDirective
+    AutosizeDirective,
+    GobackDirective
   ]
 })
 export class ToolsModule { }
