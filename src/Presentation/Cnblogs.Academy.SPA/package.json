@@ -58,7 +58,7 @@
     "rxjs-compat": "^6.5.2",
     "self-tinymce-angular": "^2.0.1",
     "sweetalert2": "^8.12.2",
-    "tinymce": "^5.0.8",
+    "tinymce": "^5.1.4",
     "ts-loader": "^6.0.3",
     "zone.js": "^0.9.1"
   },
