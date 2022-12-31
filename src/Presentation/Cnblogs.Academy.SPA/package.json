@@ -59,11 +59,11 @@
     "self-tinymce-angular": "^2.0.1",
     "sweetalert2": "^8.12.2",
     "tinymce": "^5.0.8",
-    "ts-loader": "^6.0.3",
+    "ts-loader": "^9.4.2",
     "zone.js": "^0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.800.3",
+    "@angular-devkit/build-angular": "^15.0.4",
     "@angular/cli": "8.0.3",
     "@angular/compiler-cli": "^8.0.2",
     "@angular/language-service": "8.0.2",
@@ -84,6 +84,6 @@
     "ts-node": "~8.3.0",
     "tslint": "~5.17.0",
     "typescript": "3.4.5",
-    "webpack-cli": "^3.3.7"
+    "webpack-cli": "^5.0.1"
   }
 }
